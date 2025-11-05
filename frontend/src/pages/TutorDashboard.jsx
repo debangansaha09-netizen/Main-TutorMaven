@@ -212,11 +212,26 @@ export default function TutorDashboard({ user, logout }) {
                 </DialogHeader>
                 <form onSubmit={handleUpdateProfile} className="space-y-4">
                   <div>
+                    <Label className="text-base font-semibold">Profile Picture</Label>
+                    <p className="text-sm text-gray-600 mb-3">Upload your professional photo</p>
+                    <div className="flex items-center space-x-4">
+                      <Avatar className="h-20 w-20">
+                        <AvatarImage src={user.profile_picture} />
+                        <AvatarFallback className="text-xl">{user.name[0]}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-600 mb-2">Current profile picture</p>
+                        <p className="text-xs text-gray-500">Note: Profile picture can be updated during registration</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
                     <Label>Bio</Label>
                     <Textarea
                       value={formData.bio}
                       onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                       data-testid="bio-input"
+                      placeholder="Tell students about yourself and your teaching experience..."
                     />
                   </div>
                   <div>
