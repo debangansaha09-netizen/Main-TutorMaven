@@ -59,15 +59,61 @@ export default function StudentDashboard({ user, logout }) {
     <Layout user={user}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-testid="student-dashboard">
         {/* Header */}
-        <div className="flex items-center space-x-4 mb-8">
-          <Avatar className="h-16 w-16">
-            <AvatarImage src={user.profile_picture} />
-            <AvatarFallback>{user.name[0]}</AvatarFallback>
-          </Avatar>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
-            <p className="text-gray-600">Student Dashboard</p>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center space-x-4">
+            <Avatar className="h-16 w-16">
+              <AvatarImage src={user.profile_picture} />
+              <AvatarFallback>{user.name[0]}</AvatarFallback>
+            </Avatar>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
+              <p className="text-gray-600">Student Dashboard</p>
+            </div>
           </div>
+          <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+            <DialogTrigger asChild>
+              <Button data-testid="edit-profile-btn">Edit Profile</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Edit Profile</DialogTitle>
+              </DialogHeader>
+              <form onSubmit={handleUpdateProfile} className="space-y-4">
+                <div>
+                  <Label className="text-base font-semibold">Profile Picture</Label>
+                  <p className="text-sm text-gray-600 mb-3">Upload your photo</p>
+                  <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <Avatar className="h-24 w-24">
+                      <AvatarImage src={profilePicture} />
+                      <AvatarFallback className="text-2xl">{user.name[0]}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 w-full">
+                      <label htmlFor="student-profile-picture" className="cursor-pointer">
+                        <div className="border-2 border-dashed border-blue-300 rounded-lg p-4 text-center hover:border-blue-500 hover:bg-blue-50 transition-all">
+                          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mb-2">
+                            <Upload className="w-6 h-6 text-blue-600" />
+                          </div>
+                          <p className="text-sm font-medium text-gray-700">Click to update profile picture</p>
+                          <p className="text-xs text-gray-500 mt-1">PNG, JPG up to 5MB</p>
+                        </div>
+                      </label>
+                      <input
+                        id="student-profile-picture"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        data-testid="student-profile-picture-input"
+                        onChange={handleImageUpload}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <Button type="submit" className="w-full" data-testid="save-profile-btn">
+                  Save Changes
+                </Button>
+              </form>
+            </DialogContent>
+          </Dialog>
         </div>
 
         {/* Quick Actions */}
