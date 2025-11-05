@@ -287,16 +287,23 @@ export default function TutorDashboard({ user, logout }) {
                     />
                   </div>
                   <div>
-                    <Label>Coaching Centre Photo</Label>
+                    <Label className="text-base font-semibold">Coaching Centre Photo</Label>
+                    <p className="text-sm text-gray-600 mb-3">Upload a clear photo of your coaching centre</p>
                     <div className="mt-2">
                       <label htmlFor="coaching-photo" className="cursor-pointer">
-                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 transition-colors">
+                        <div className="border-2 border-dashed border-blue-300 rounded-lg p-6 text-center hover:border-blue-500 hover:bg-blue-50 transition-all">
                           {formData.coaching_photo ? (
-                            <img src={formData.coaching_photo} alt="Coaching" className="w-32 h-32 mx-auto object-cover rounded-lg" />
+                            <div className="space-y-3">
+                              <img src={formData.coaching_photo} alt="Coaching Centre" className="w-full max-w-md h-48 mx-auto object-cover rounded-lg shadow-md" />
+                              <p className="text-sm text-blue-600 font-medium">Click to change photo</p>
+                            </div>
                           ) : (
                             <div>
-                              <Upload className="w-8 h-8 mx-auto text-gray-400" />
-                              <p className="text-sm text-gray-600 mt-2">Click to upload</p>
+                              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-3">
+                                <Upload className="w-8 h-8 text-blue-600" />
+                              </div>
+                              <p className="text-sm font-medium text-gray-700">Click to upload coaching centre photo</p>
+                              <p className="text-xs text-gray-500 mt-1">PNG, JPG up to 5MB</p>
                             </div>
                           )}
                         </div>
@@ -306,6 +313,7 @@ export default function TutorDashboard({ user, logout }) {
                         type="file"
                         accept="image/*"
                         className="hidden"
+                        data-testid="coaching-photo-input"
                         onChange={(e) => handleImageUpload(e, 'coaching_photo')}
                       />
                     </div>
