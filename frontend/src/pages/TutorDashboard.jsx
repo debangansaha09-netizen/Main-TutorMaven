@@ -218,14 +218,29 @@ export default function TutorDashboard({ user, logout }) {
                   <div>
                     <Label className="text-base font-semibold">Profile Picture</Label>
                     <p className="text-sm text-gray-600 mb-3">Upload your professional photo</p>
-                    <div className="flex items-center space-x-4">
-                      <Avatar className="h-20 w-20">
-                        <AvatarImage src={user.profile_picture} />
-                        <AvatarFallback className="text-xl">{user.name[0]}</AvatarFallback>
+                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+                      <Avatar className="h-24 w-24">
+                        <AvatarImage src={formData.profile_picture || user.profile_picture} />
+                        <AvatarFallback className="text-2xl">{user.name[0]}</AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
-                        <p className="text-sm text-gray-600 mb-2">Current profile picture</p>
-                        <p className="text-xs text-gray-500">Note: Profile picture can be updated during registration</p>
+                        <label htmlFor="profile-picture-upload" className="cursor-pointer">
+                          <div className="border-2 border-dashed border-green-300 rounded-lg p-4 text-center hover:border-green-500 hover:bg-green-50 transition-all">
+                            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-2">
+                              <Upload className="w-6 h-6 text-green-600" />
+                            </div>
+                            <p className="text-sm font-medium text-gray-700">Click to update profile picture</p>
+                            <p className="text-xs text-gray-500 mt-1">PNG, JPG up to 5MB</p>
+                          </div>
+                        </label>
+                        <input
+                          id="profile-picture-upload"
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          data-testid="profile-picture-upload-input"
+                          onChange={(e) => handleImageUpload(e, 'profile_picture')}
+                        />
                       </div>
                     </div>
                   </div>
