@@ -36,7 +36,8 @@ export default function TutorDashboard({ user, logout }) {
     contact_number: '',
     coaching_photo: '',
     teaching_days: [],
-    total_hours_per_week: ''
+    total_hours_per_week: '',
+    profile_picture: ''
   });
 
   useEffect(() => {
