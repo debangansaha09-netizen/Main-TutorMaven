@@ -404,6 +404,22 @@ export default function TutorDashboard({ user, logout }) {
           </Card>
         </div>
 
+        {/* Coaching Centre Photo */}
+        {profile.coaching_photo && (
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Coaching Centre</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <img 
+                src={profile.coaching_photo} 
+                alt="Coaching Centre" 
+                className="w-full h-64 object-cover rounded-lg"
+              />
+            </CardContent>
+          </Card>
+        )}
+
         {/* Classes Taught */}
         <Card className="mb-8">
           <CardHeader>
