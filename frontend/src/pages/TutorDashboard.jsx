@@ -67,7 +67,8 @@ export default function TutorDashboard({ user, logout }) {
         contact_number: profileRes.data.contact_number || '',
         coaching_photo: profileRes.data.coaching_photo || '',
         teaching_days: profileRes.data.teaching_days || [],
-        total_hours_per_week: profileRes.data.total_hours_per_week || ''
+        total_hours_per_week: profileRes.data.total_hours_per_week || '',
+        profile_picture: user.profile_picture || ''
       });
     } catch (error) {
       toast.error('Error fetching data');
