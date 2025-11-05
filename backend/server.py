@@ -284,6 +284,22 @@ async def admin_login(credentials: AdminLogin):
 async def get_me(current_user: dict = Depends(get_current_user)):
     return current_user
 
+class StudentProfileUpdate(BaseModel):
+    profile_picture: Optional[str] = None
+
+@api_router.put("/students/profile")
+async def update_student_profile(profile_data: StudentProfileUpdate, current_user: dict = Depends(get_current_user)):
+    if current_user['role'] != UserRole.STUDENT:
+        raise HTTPException(status_code=403, detail="Only students can update profile")
+    
+    if profile_data.profile_picture:
+        await db.users.update_one(
+            {"id": current_user['id']},
+            {"$set": {"profile_picture": profile_data.profile_picture}}
+        )
+    
+    return {"message": "Profile updated successfully"}
+
 # Tutor Routes
 @api_router.get("/tutors")
 async def get_tutors(subject: Optional[str] = None):
