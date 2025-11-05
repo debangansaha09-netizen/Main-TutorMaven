@@ -345,12 +345,24 @@ async def get_tutor(tutor_id: str):
         "avg_rating": avg_rating
     }
 
+class ProfileUpdateWithPicture(TutorProfileUpdate):
+    profile_picture: Optional[str] = None
+
 @api_router.put("/tutors/profile")
-async def update_tutor_profile(profile_data: TutorProfileUpdate, current_user: dict = Depends(get_current_user)):
+async def update_tutor_profile(profile_data: ProfileUpdateWithPicture, current_user: dict = Depends(get_current_user)):
     if current_user['role'] != UserRole.TUTOR:
         raise HTTPException(status_code=403, detail="Only tutors can update profile")
     
     update_data = {k: v for k, v in profile_data.model_dump().items() if v is not None}
+    
+    # Update profile picture in users collection if provided
+    if update_data.get('profile_picture'):
+        await db.users.update_one(
+            {"id": current_user['id']},
+            {"$set": {"profile_picture": update_data['profile_picture']}}
+        )
+        del update_data['profile_picture']
+    
     if update_data:
         await db.tutor_profiles.update_one(
             {"user_id": current_user['id']},
