@@ -272,7 +272,8 @@ async def admin_login(credentials: AdminLogin):
         admin = admin_dict
     
     token = create_access_token({"sub": admin['id'], "role": admin['role']})
-    del admin['password_hash'] if 'password_hash' in admin else None
+    if 'password_hash' in admin:
+        del admin['password_hash']
     
     return {
         "token": token,
