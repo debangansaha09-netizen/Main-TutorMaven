@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'sonner';
 import Layout from '../components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { BookOpen, Calendar, CheckCircle } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
+import { BookOpen, Calendar, CheckCircle, Upload } from 'lucide-react';
+import { Label } from '../components/ui/label';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export default function StudentDashboard({ user, logout }) {
   const [subscriptions, setSubscriptions] = useState([]);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(user.profile_picture || '');
 
   useEffect(() => {
     fetchSubscriptions();
@@ -24,6 +29,29 @@ export default function StudentDashboard({ user, logout }) {
       setSubscriptions(response.data);
     } catch (error) {
       console.error('Error fetching subscriptions:', error);
+    }
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePicture(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUpdateProfile = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`${API}/students/profile`, { profile_picture: profilePicture });
+      toast.success('Profile updated successfully');
+      setEditDialogOpen(false);
+      window.location.reload();
+    } catch (error) {
+      toast.error('Error updating profile');
     }
   };
 
