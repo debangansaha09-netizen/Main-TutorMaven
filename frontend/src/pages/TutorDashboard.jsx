@@ -84,6 +84,8 @@ export default function TutorDashboard({ user, logout }) {
           setFormData({ ...formData, coaching_photo: reader.result });
         } else if (field === 'verification_proof') {
           setVerificationProof(reader.result);
+        } else if (field === 'profile_picture') {
+          setFormData({ ...formData, profile_picture: reader.result });
         }
       };
       reader.readAsDataURL(file);
