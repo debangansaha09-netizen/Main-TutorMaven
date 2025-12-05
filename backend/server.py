@@ -134,7 +134,8 @@ class TutorProfile(BaseModel):
     contact_number: Optional[str] = None
     coaching_photo: Optional[str] = None
     teaching_days: List[str] = []
-    total_hours_per_week: int = 0
+    hours_per_day: int = 0
+    boards: List[str] = []  # CBSE, ICSE, STATE BOARD
     is_verified: bool = False
     verification_proof: Optional[str] = None
     verification_status: VerificationStatus = VerificationStatus.PENDING
