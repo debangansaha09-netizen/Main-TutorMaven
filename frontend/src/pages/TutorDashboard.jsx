@@ -470,7 +470,7 @@ export default function TutorDashboard({ user, logout }) {
               <Clock className="h-4 w-4 text-purple-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.total_hours_per_week}/week</div>
+              <div className="text-2xl font-bold">{profile.hours_per_day || 0} hrs/day</div>
             </CardContent>
           </Card>
           <Card data-testid="income-stat-card">
