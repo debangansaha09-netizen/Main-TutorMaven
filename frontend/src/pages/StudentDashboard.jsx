@@ -17,10 +17,17 @@ const API = `${BACKEND_URL}/api`;
 export default function StudentDashboard({ user, logout }) {
   const [subscriptions, setSubscriptions] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-  const [profilePicture, setProfilePicture] = useState(user.profile_picture || '');
+  const [formData, setFormData] = useState({
+    profile_picture: user.profile_picture || '',
+    name: user.name || '',
+    school_name: '',
+    board: '',
+    subjects_interested: []
+  });
 
   useEffect(() => {
     fetchSubscriptions();
+    fetchStudentProfile();
   }, []);
 
   const fetchSubscriptions = async () => {
@@ -32,12 +39,28 @@ export default function StudentDashboard({ user, logout }) {
     }
   };
 
+  const fetchStudentProfile = async () => {
+    try {
+      const response = await axios.get(`${API}/students/profile/${user.id}`);
+      if (response.data) {
+        setFormData(prev => ({
+          ...prev,
+          school_name: response.data.school_name || '',
+          board: response.data.board || '',
+          subjects_interested: response.data.subjects_interested || []
+        }));
+      }
+    } catch (error) {
+      console.error('Error fetching student profile:', error);
+    }
+  };
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfilePicture(reader.result);
+        setFormData({ ...formData, profile_picture: reader.result });
       };
       reader.readAsDataURL(file);
     }
@@ -46,7 +69,7 @@ export default function StudentDashboard({ user, logout }) {
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${API}/students/profile`, { profile_picture: profilePicture });
+      await axios.put(`${API}/students/profile`, formData);
       toast.success('Profile updated successfully');
       setEditDialogOpen(false);
       window.location.reload();
