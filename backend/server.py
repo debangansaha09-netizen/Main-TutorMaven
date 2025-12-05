@@ -307,13 +307,47 @@ async def update_student_profile(profile_data: StudentProfileUpdate, current_use
     if current_user['role'] != UserRole.STUDENT:
         raise HTTPException(status_code=403, detail="Only students can update profile")
     
+    # Update user fields
+    user_updates = {}
     if profile_data.profile_picture:
+        user_updates["profile_picture"] = profile_data.profile_picture
+    if profile_data.name:
+        user_updates["name"] = profile_data.name
+    
+    if user_updates:
         await db.users.update_one(
             {"id": current_user['id']},
-            {"$set": {"profile_picture": profile_data.profile_picture}}
+            {"$set": user_updates}
         )
     
+    # Update or create student profile
+    profile_updates = {}
+    if profile_data.school_name is not None:
+        profile_updates["school_name"] = profile_data.school_name
+    if profile_data.board is not None:
+        profile_updates["board"] = profile_data.board
+    if profile_data.subjects_interested is not None:
+        profile_updates["subjects_interested"] = profile_data.subjects_interested
+    
+    if profile_updates:
+        # Check if student profile exists
+        existing = await db.student_profiles.find_one({"user_id": current_user['id']})
+        if existing:
+            await db.student_profiles.update_one(
+                {"user_id": current_user['id']},
+                {"$set": profile_updates}
+            )
+        else:
+            # Create new profile
+            new_profile = StudentProfile(user_id=current_user['id'], **profile_updates)
+            await db.student_profiles.insert_one(new_profile.model_dump())
+    
     return {"message": "Profile updated successfully"}
+
+@api_router.get("/students/profile/{user_id}")
+async def get_student_profile(user_id: str):
+    profile = await db.student_profiles.find_one({"user_id": user_id}, {"_id": 0})
+    return profile or {}
 
 # Tutor Routes
 @api_router.get("/tutors")
