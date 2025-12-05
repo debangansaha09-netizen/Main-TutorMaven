@@ -249,6 +249,15 @@ export default function TutorDashboard({ user, logout }) {
                     </div>
                   </div>
                   <div>
+                    <Label>Name</Label>
+                    <Input
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      data-testid="name-input"
+                      placeholder="Your full name"
+                    />
+                  </div>
+                  <div>
                     <Label>Bio</Label>
                     <Textarea
                       value={formData.bio}
