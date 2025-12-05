@@ -325,13 +325,38 @@ export default function TutorDashboard({ user, logout }) {
                     </div>
                   </div>
                   <div>
-                    <Label>Total Hours Per Week</Label>
+                    <Label>Teaching Hours Per Day</Label>
                     <Input
                       type="number"
-                      value={formData.total_hours_per_week}
-                      onChange={(e) => setFormData({ ...formData, total_hours_per_week: e.target.value })}
+                      value={formData.hours_per_day}
+                      onChange={(e) => setFormData({ ...formData, hours_per_day: e.target.value })}
                       data-testid="hours-input"
+                      placeholder="e.g., 6"
                     />
+                  </div>
+                  <div>
+                    <Label>Boards You Teach</Label>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {['CBSE', 'ICSE', 'STATE BOARD'].map(board => (
+                        <Button
+                          key={board}
+                          type="button"
+                          variant={formData.boards.includes(board) ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => {
+                            setFormData(prev => ({
+                              ...prev,
+                              boards: prev.boards.includes(board)
+                                ? prev.boards.filter(b => b !== board)
+                                : [...prev.boards, board]
+                            }));
+                          }}
+                          data-testid={`board-${board.toLowerCase().replace(' ', '-')}-btn`}
+                        >
+                          {board}
+                        </Button>
+                      ))}
+                    </div>
                   </div>
                   <div>
                     <Label className="text-base font-semibold">Coaching Centre Photo</Label>
