@@ -103,12 +103,12 @@ export default function TutorDashboard({ user, logout }) {
         ...formData,
         subjects: formData.subjects.split(',').map(s => s.trim()).filter(Boolean),
         monthly_fee: parseFloat(formData.monthly_fee),
-        total_hours_per_week: parseInt(formData.total_hours_per_week)
+        hours_per_day: parseInt(formData.hours_per_day)
       };
       await axios.put(`${API}/tutors/profile`, updateData);
       toast.success('Profile updated successfully');
       setEditDialogOpen(false);
-      fetchData();
+      window.location.reload();
     } catch (error) {
       toast.error('Error updating profile');
     }
