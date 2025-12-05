@@ -107,7 +107,7 @@ export default function StudentDashboard({ user, logout }) {
                   <p className="text-sm text-gray-600 mb-3">Upload your photo</p>
                   <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
                     <Avatar className="h-24 w-24">
-                      <AvatarImage src={profilePicture} />
+                      <AvatarImage src={formData.profile_picture} />
                       <AvatarFallback className="text-2xl">{user.name[0]}</AvatarFallback>
                     </Avatar>
                     <div className="flex-1 w-full">
@@ -130,6 +130,53 @@ export default function StudentDashboard({ user, logout }) {
                       />
                     </div>
                   </div>
+                </div>
+                <div>
+                  <Label>Name</Label>
+                  <Input
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    data-testid="student-name-input"
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div>
+                  <Label>School Name</Label>
+                  <Input
+                    value={formData.school_name}
+                    onChange={(e) => setFormData({ ...formData, school_name: e.target.value })}
+                    data-testid="school-name-input"
+                    placeholder="Enter your school name"
+                  />
+                </div>
+                <div>
+                  <Label>Board</Label>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {['CBSE', 'ICSE', 'STATE BOARD'].map(board => (
+                      <Button
+                        key={board}
+                        type="button"
+                        variant={formData.board === board ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setFormData({ ...formData, board: board })}
+                        data-testid={`student-board-${board.toLowerCase().replace(' ', '-')}-btn`}
+                      >
+                        {board}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <Label>Subjects Interested In (comma separated)</Label>
+                  <Input
+                    value={formData.subjects_interested.join(', ')}
+                    onChange={(e) => setFormData({ 
+                      ...formData, 
+                      subjects_interested: e.target.value.split(',').map(s => s.trim()).filter(Boolean)
+                    })}
+                    data-testid="subjects-interested-input"
+                    placeholder="e.g., Math, Science, English"
+                  />
                 </div>
                 <Button type="submit" className="w-full" data-testid="save-profile-btn">
                   Save Changes
