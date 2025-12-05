@@ -287,8 +287,20 @@ async def admin_login(credentials: AdminLogin):
 async def get_me(current_user: dict = Depends(get_current_user)):
     return current_user
 
+class StudentProfile(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    school_name: Optional[str] = None
+    board: Optional[str] = None  # CBSE, ICSE, STATE BOARD
+    subjects_interested: List[str] = []
+
 class StudentProfileUpdate(BaseModel):
     profile_picture: Optional[str] = None
+    name: Optional[str] = None
+    school_name: Optional[str] = None
+    board: Optional[str] = None
+    subjects_interested: Optional[List[str]] = None
 
 @api_router.put("/students/profile")
 async def update_student_profile(profile_data: StudentProfileUpdate, current_user: dict = Depends(get_current_user)):
