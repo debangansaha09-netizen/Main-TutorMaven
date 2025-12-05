@@ -420,13 +420,20 @@ async def update_tutor_profile(profile_data: ProfileUpdateWithPicture, current_u
     
     update_data = {k: v for k, v in profile_data.model_dump().items() if v is not None}
     
-    # Update profile picture in users collection if provided
+    # Update user fields (profile picture and name) in users collection
+    user_updates = {}
     if update_data.get('profile_picture'):
+        user_updates["profile_picture"] = update_data['profile_picture']
+        del update_data['profile_picture']
+    if update_data.get('name'):
+        user_updates["name"] = update_data['name']
+        del update_data['name']
+    
+    if user_updates:
         await db.users.update_one(
             {"id": current_user['id']},
-            {"$set": {"profile_picture": update_data['profile_picture']}}
+            {"$set": user_updates}
         )
-        del update_data['profile_picture']
     
     if update_data:
         await db.tutor_profiles.update_one(
