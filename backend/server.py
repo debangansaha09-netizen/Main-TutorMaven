@@ -118,7 +118,9 @@ class TutorProfileUpdate(BaseModel):
     contact_number: Optional[str] = None
     coaching_photo: Optional[str] = None
     teaching_days: Optional[List[str]] = None
-    total_hours_per_week: Optional[int] = None
+    hours_per_day: Optional[int] = None
+    boards: Optional[List[str]] = None  # CBSE, ICSE, STATE BOARD
+    name: Optional[str] = None
 
 class TutorProfile(BaseModel):
     model_config = ConfigDict(extra="ignore")
