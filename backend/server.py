@@ -623,6 +623,18 @@ async def create_review(review_data: ReviewCreate, current_user: dict = Depends(
     
     return review
 
+@api_router.delete("/reviews/{review_id}")
+async def delete_review(review_id: str, current_user: dict = Depends(get_current_user)):
+    review = await db.reviews.find_one({"id": review_id})
+    if not review:
+        raise HTTPException(status_code=404, detail="Review not found")
+    
+    if review['student_id'] != current_user['id']:
+        raise HTTPException(status_code=403, detail="You can only delete your own reviews")
+    
+    await db.reviews.delete_one({"id": review_id})
+    return {"message": "Review deleted successfully"}
+
 # Fee & Attendance Routes
 @api_router.get("/fees/{subscription_id}")
 async def get_fees(subscription_id: str, current_user: dict = Depends(get_current_user)):
