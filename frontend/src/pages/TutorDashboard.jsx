@@ -21,8 +21,6 @@ export default function TutorDashboard({ user, logout }) {
   const [subscriptions, setSubscriptions] = useState([]);
   const [profile, setProfile] = useState(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-  const [verifyDialogOpen, setVerifyDialogOpen] = useState(false);
-  const [verificationProof, setVerificationProof] = useState('');
   const [classDialogOpen, setClassDialogOpen] = useState(false);
   const [newClass, setNewClass] = useState({ class_range: '', subjects: '' });
   const [classes, setClasses] = useState([]);
