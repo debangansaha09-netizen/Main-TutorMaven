@@ -326,20 +326,20 @@ export default function StudentDashboard({ user, logout }) {
             {subscriptions.length > 0 ? (
               <div className="space-y-4">
                 {subscriptions.map((sub) => (
-                  <div key={sub.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg" data-testid={`subscription-${sub.id}`}>
-                    <div className="flex items-center space-x-4">
-                      <Avatar>
+                  <div key={sub.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 md:p-4 bg-gray-50 rounded-lg gap-3" data-testid={`subscription-${sub.id}`}>
+                    <div className="flex items-center space-x-3 md:space-x-4 flex-1">
+                      <Avatar className="h-12 w-12 md:h-auto md:w-auto">
                         <AvatarImage src={sub.tutor?.profile_picture} />
                         <AvatarFallback>{sub.tutor?.name[0]}</AvatarFallback>
                       </Avatar>
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-center space-x-2">
-                          <p className="font-medium">{sub.tutor?.name}</p>
+                          <p className="font-medium truncate">{sub.tutor?.name}</p>
                           {sub.tutor_profile?.is_verified && (
-                            <CheckCircle className="w-4 h-4 text-blue-500" />
+                            <CheckCircle className="w-4 h-4 text-blue-500 flex-shrink-0" />
                           )}
                         </div>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 truncate">
                           {sub.tutor_profile?.subjects?.slice(0, 3).join(', ')}
                         </p>
                         <Badge
@@ -357,10 +357,10 @@ export default function StudentDashboard({ user, logout }) {
                       </div>
                     </div>
                     {sub.status === 'active' && (
-                      <div className="text-right">
-                        <p className="text-lg font-bold text-gray-900">₹{sub.tutor_profile?.monthly_fee}/month</p>
+                      <div className="text-left sm:text-right w-full sm:w-auto">
+                        <p className="text-base md:text-lg font-bold text-gray-900">₹{sub.tutor_profile?.monthly_fee}/month</p>
                         <Link to={`/tutor/${sub.tutor_id}`}>
-                          <Button size="sm" variant="outline" className="mt-2" data-testid={`view-tutor-${sub.id}`}>
+                          <Button size="sm" variant="outline" className="mt-2 w-full sm:w-auto" data-testid={`view-tutor-${sub.id}`}>
                             View Details
                           </Button>
                         </Link>
