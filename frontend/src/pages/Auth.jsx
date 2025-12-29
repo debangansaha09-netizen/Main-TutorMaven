@@ -107,7 +107,7 @@ export default function Auth({ setUser }) {
             <TabsContent value="login">
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <Label htmlFor="login-email">Email</Label>
+                  <Label htmlFor="login-email" className="text-white">Email</Label>
                   <Input
                     id="login-email"
                     type="email"
@@ -115,10 +115,11 @@ export default function Auth({ setUser }) {
                     value={loginData.email}
                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                     required
+                    className="bg-white/20 backdrop-blur-lg border-white/30 text-white placeholder:text-white/60"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="login-password">Password</Label>
+                  <Label htmlFor="login-password" className="text-white">Password</Label>
                   <Input
                     id="login-password"
                     type="password"
@@ -126,9 +127,10 @@ export default function Auth({ setUser }) {
                     value={loginData.password}
                     onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                     required
+                    className="bg-white/20 backdrop-blur-lg border-white/30 text-white placeholder:text-white/60"
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={loading} data-testid="login-submit-btn">
+                <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700" disabled={loading} data-testid="login-submit-btn">
                   {loading ? 'Logging in...' : 'Login'}
                 </Button>
               </form>
