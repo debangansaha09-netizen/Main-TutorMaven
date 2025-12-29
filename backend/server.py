@@ -205,6 +205,7 @@ class Notification(BaseModel):
 
 class VerificationProof(BaseModel):
     proof_image: str
+    phone_number: str
 
 # Auth Routes
 @api_router.post("/auth/register")
