@@ -77,6 +77,16 @@ export default function TutorDetail({ user, logout }) {
     }
   };
 
+  const handleDeleteReview = async (reviewId) => {
+    try {
+      await axios.delete(`${API}/reviews/${reviewId}`);
+      toast.success('Review deleted');
+      fetchTutor();
+    } catch (error) {
+      toast.error('Error deleting review');
+    }
+  };
+
   if (loading) {
     return (
       <Layout user={user}>
