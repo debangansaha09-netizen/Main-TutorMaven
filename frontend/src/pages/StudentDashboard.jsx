@@ -17,6 +17,7 @@ const API = `${BACKEND_URL}/api`;
 export default function StudentDashboard({ user, logout }) {
   const [subscriptions, setSubscriptions] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [banners, setBanners] = useState([]);
   const [formData, setFormData] = useState({
     profile_picture: user.profile_picture || '',
     name: user.name || '',
@@ -29,6 +30,7 @@ export default function StudentDashboard({ user, logout }) {
   useEffect(() => {
     fetchSubscriptions();
     fetchStudentProfile();
+    fetchBanners();
   }, []);
 
   const fetchSubscriptions = async () => {
