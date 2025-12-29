@@ -46,7 +46,7 @@ export default function StudentDashboard({ user, logout }) {
   const fetchStudentProfile = async () => {
     try {
       const response = await axios.get(`${API}/students/profile/${user.id}`);
-      if (response.data) {
+      if (response.data && response.data.parent_code) {
         setFormData(prev => ({
           ...prev,
           school_name: response.data.school_name || '',
@@ -55,12 +55,30 @@ export default function StudentDashboard({ user, logout }) {
           parent_code: response.data.parent_code || ''
         }));
       } else {
-        // Create profile if doesn't exist
-        await axios.put(`${API}/students/profile`, {});
-        fetchStudentProfile();
+        // Create profile if doesn't exist or parent code is missing
+        console.log('Creating/updating student profile to generate parent code...');
+        await axios.put(`${API}/students/profile`, { name: user.name });
+        // Fetch again after creation
+        const newResponse = await axios.get(`${API}/students/profile/${user.id}`);
+        if (newResponse.data) {
+          setFormData(prev => ({
+            ...prev,
+            school_name: newResponse.data.school_name || '',
+            board: newResponse.data.board || '',
+            subjects_interested: newResponse.data.subjects_interested || [],
+            parent_code: newResponse.data.parent_code || 'LOADING...'
+          }));
+        }
       }
     } catch (error) {
       console.error('Error fetching student profile:', error);
+      // If error, try to create profile
+      try {
+        await axios.put(`${API}/students/profile`, { name: user.name });
+        setTimeout(fetchStudentProfile, 1000); // Retry after 1 second
+      } catch (createError) {
+        console.error('Error creating profile:', createError);
+      }
     }
   };
 
