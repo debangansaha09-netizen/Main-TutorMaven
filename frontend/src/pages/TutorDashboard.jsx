@@ -446,6 +446,89 @@ export default function TutorDashboard({ user, logout }) {
           </Card>
         )}
 
+        {/* Verification Banner (Only for Verified Tutors) */}
+        {profile.is_verified && (
+          <Card className="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Award className="w-6 h-6 text-blue-600" />
+                    <span>Verified Tutor Banner</span>
+                  </CardTitle>
+                  <p className="text-sm text-gray-600 mt-1">Upload a promotional banner to showcase on student homepages</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {profile.verification_banner ? (
+                <div className="space-y-4">
+                  <img src={profile.verification_banner} alt="Banner" className="w-full h-48 object-cover rounded-xl shadow-lg" />
+                  <label htmlFor="banner-upload" className="cursor-pointer">
+                    <Button type="button" variant="outline" className="w-full" asChild>
+                      <span>Change Banner</span>
+                    </Button>
+                  </label>
+                  <input
+                    id="banner-upload"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = async () => {
+                          try {
+                            await axios.post(`${API}/tutors/banner`, { banner: reader.result });
+                            toast.success('Banner uploaded successfully!');
+                            fetchData();
+                          } catch (error) {
+                            toast.error('Error uploading banner');
+                          }
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <label htmlFor="banner-upload-initial" className="cursor-pointer">
+                    <div className="border-2 border-dashed border-blue-300 rounded-xl p-8 text-center hover:border-blue-500 hover:bg-blue-50 transition-all">
+                      <Upload className="w-12 h-12 mx-auto text-blue-400 mb-3" />
+                      <p className="font-medium text-gray-700">Click to upload your promotional banner</p>
+                      <p className="text-sm text-gray-500 mt-1">Recommended size: 1200x400px</p>
+                    </div>
+                  </label>
+                  <input
+                    id="banner-upload-initial"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = async () => {
+                          try {
+                            await axios.post(`${API}/tutors/banner`, { banner: reader.result });
+                            toast.success('Banner uploaded successfully!');
+                            fetchData();
+                          } catch (error) {
+                            toast.error('Error uploading banner');
+                          }
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                  />
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
         {/* Classes Taught */}
         <Card className="mb-8">
           <CardHeader>
