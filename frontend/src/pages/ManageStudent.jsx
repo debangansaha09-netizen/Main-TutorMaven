@@ -152,7 +152,11 @@ export default function ManageStudent({ user, logout }) {
                           key={month}
                           type="button"
                           onClick={() => handleUpdateFee(monthNum, currentYear, isPaid ? 'unpaid' : 'paid')}
-                          className={`p-4 rounded-xl border-2 transition-all ${\n                            isPaid \n                              ? 'bg-gradient-to-br from-green-50 to-green-100 border-green-300 hover:border-green-400' \n                              : 'bg-gradient-to-br from-red-50 to-red-100 border-red-300 hover:border-red-400'\n                          }`}
+                          className={`p-4 rounded-xl border-2 transition-all ${
+                            isPaid 
+                              ? 'bg-gradient-to-br from-green-50 to-green-100 border-green-300 hover:border-green-400' 
+                              : 'bg-gradient-to-br from-red-50 to-red-100 border-red-300 hover:border-red-400'
+                          }`}
                           data-testid={`month-${month.toLowerCase()}-btn`}
                         >
                           <div className="text-center">
@@ -164,7 +168,9 @@ export default function ManageStudent({ user, logout }) {
                                 <X className="w-6 h-6 text-red-600 mx-auto" />
                               )}
                             </div>
-                            <p className={`text-xs mt-1 font-medium ${\n                              isPaid ? 'text-green-700' : 'text-red-700'\n                            }`}>
+                            <p className={`text-xs mt-1 font-medium ${
+                              isPaid ? 'text-green-700' : 'text-red-700'
+                            }`}>
                               {isPaid ? 'Paid' : 'Unpaid'}
                             </p>
                           </div>
