@@ -116,20 +116,20 @@ export default function StudentDashboard({ user, logout }) {
 
   return (
     <Layout user={user}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-testid="student-dashboard">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8" data-testid="student-dashboard">
         {/* Parent Code Card */}
-        <Card className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
+        <Card className="mb-4 md:mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+          <CardContent className="pt-4 md:pt-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-4">
+              <div className="text-center sm:text-left flex-1">
                 <p className="text-sm text-gray-600 font-semibold">Your Parent Access Code</p>
-                <p className="text-3xl font-mono font-bold text-blue-600 tracking-wider mt-2">
+                <p className="text-2xl md:text-3xl font-mono font-bold text-blue-600 tracking-wider mt-2">
                   {formData.parent_code || 'Loading...'}
                 </p>
                 <p className="text-xs text-gray-500 mt-2">Share this code with your parents to give them access to your progress</p>
               </div>
-              <div className="p-4 bg-white rounded-xl shadow-md">
-                <Users className="w-12 h-12 text-blue-600" />
+              <div className="p-3 md:p-4 bg-white rounded-xl shadow-md">
+                <Users className="w-10 h-10 md:w-12 md:h-12 text-blue-600" />
               </div>
             </div>
           </CardContent>
@@ -137,25 +137,25 @@ export default function StudentDashboard({ user, logout }) {
 
         {/* Verified Tutor Banners */}
         {banners.length > 0 && (
-          <div className="mb-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Featured Verified Tutors</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="mb-4 md:mb-6">
+            <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Featured Verified Tutors</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               {banners.map((banner, index) => (
                 <Link key={index} to={`/tutor/${banner.tutor_id}`}>
                   <Card className="overflow-hidden hover:shadow-2xl transition-all cursor-pointer group">
-                    <div className="relative h-48">
+                    <div className="relative h-40 md:h-48">
                       <img 
                         src={banner.banner} 
                         alt={`${banner.tutor_name}'s Banner`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                      <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 right-3 md:right-4 flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <p className="text-white font-bold text-lg drop-shadow-lg">{banner.tutor_name}</p>
-                          <CheckCircle className="w-5 h-5 text-blue-400" />
+                          <p className="text-white font-bold text-base md:text-lg drop-shadow-lg">{banner.tutor_name}</p>
+                          <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
                         </div>
-                        <Badge className="bg-blue-500 text-white">Verified</Badge>
+                        <Badge className="bg-blue-500 text-white text-xs">Verified</Badge>
                       </div>
                     </div>
                   </Card>
@@ -166,7 +166,7 @@ export default function StudentDashboard({ user, logout }) {
         )}
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 mb-6 md:mb-8">
           <div className="flex items-center space-x-4">
             <Avatar className="h-16 w-16">
               <AvatarImage src={user.profile_picture} />
