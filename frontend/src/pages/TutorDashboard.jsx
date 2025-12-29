@@ -110,21 +110,6 @@ export default function TutorDashboard({ user, logout }) {
     }
   };
 
-  const handleSubmitVerification = async () => {
-    if (!verificationProof) {
-      toast.error('Please upload proof of payment');
-      return;
-    }
-    try {
-      await axios.post(`${API}/tutors/verification`, { proof_image: verificationProof });
-      toast.success('Verification submitted! Awaiting admin approval');
-      setVerifyDialogOpen(false);
-      fetchData();
-    } catch (error) {
-      toast.error('Error submitting verification');
-    }
-  };
-
   const handleAcceptSubscription = async (subId) => {
     try {
       await axios.put(`${API}/subscriptions/accept/${subId}`);
