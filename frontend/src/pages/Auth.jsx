@@ -72,23 +72,23 @@ export default function Auth({ setUser }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-3 sm:px-4 py-6">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 mb-4 shadow-xl">
+        <div className="text-center mb-6 md:mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 mb-3 md:mb-4 shadow-xl">
             <img 
               src="https://customer-assets.emergentagent.com/job_b50a8eda-643d-42ca-93a2-b95046836ba5/artifacts/p815m8ok_IMG-20251102-WA0004.jpg" 
               alt="TutorMaven Logo" 
-              className="h-12 w-12 rounded-full object-cover"
+              className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover"
             />
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent px-2">
             Welcome to TutorMaven
           </h1>
-          <p className="text-gray-600 mt-2">Sign in or create an account</p>
+          <p className="text-sm md:text-base text-gray-600 mt-2">Sign in or create an account</p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+        <div className="bg-white rounded-2xl md:rounded-3xl shadow-2xl p-5 sm:p-6 md:p-8 border border-gray-100">
           <Tabs defaultValue="login">
             <TabsList className="grid w-full grid-cols-2" data-testid="auth-tabs">
               <TabsTrigger value="login" data-testid="login-tab">Login</TabsTrigger>
