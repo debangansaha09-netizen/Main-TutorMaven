@@ -117,7 +117,7 @@ export default function TutorDetail({ user, logout }) {
                 <div className="flex items-center justify-center md:justify-start space-x-2 mb-2">
                   <h1 className="text-3xl font-bold text-gray-900">{tutor.user?.name}</h1>
                   {tutor.is_verified && (
-                    <CheckCircle className="w-6 h-6 text-green-500" data-testid="verified-badge" />
+                    <CheckCircle className="w-6 h-6 text-blue-500" data-testid="verified-badge" />
                   )}
                 </div>
                 {tutor.avg_rating > 0 && (
