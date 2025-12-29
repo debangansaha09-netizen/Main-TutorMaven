@@ -203,9 +203,68 @@ class Notification(BaseModel):
     read: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-class VerificationProof(BaseModel):
-    proof_image: str
-    phone_number: str
+class ParentLogin(BaseModel):
+    parent_code: str
+
+@api_router.post("/parents/login")
+async def parent_login(credentials: ParentLogin):
+    # Find student by parent code
+    student_profile = await db.student_profiles.find_one({"parent_code": credentials.parent_code}, {"_id": 0})
+    if not student_profile:
+        raise HTTPException(status_code=401, detail="Invalid parent code")
+    
+    # Get student user data
+    student = await db.users.find_one({"id": student_profile['user_id']}, {"_id": 0, "password_hash": 0})
+    
+    # Get subscriptions
+    subscriptions = await db.subscriptions.find(
+        {"student_id": student_profile['user_id'], "status": SubscriptionStatus.ACTIVE},
+        {"_id": 0}
+    ).to_list(1000)
+    
+    return {
+        "student": student,
+        "student_profile": student_profile,
+        "subscriptions": subscriptions
+    }
+
+@api_router.post("/tutors/banner")
+async def upload_banner(banner_data: dict, current_user: dict = Depends(get_current_user)):
+    if current_user['role'] != UserRole.TUTOR:
+        raise HTTPException(status_code=403, detail="Only tutors can upload banner")
+    
+    # Check if tutor is verified
+    profile = await db.tutor_profiles.find_one({"user_id": current_user['id']})
+    if not profile or not profile.get('is_verified'):
+        raise HTTPException(status_code=403, detail="Only verified tutors can upload banner")
+    
+    await db.tutor_profiles.update_one(
+        {"user_id": current_user['id']},
+        {"$set": {"verification_banner": banner_data.get('banner')}}
+    )
+    
+    return {"message": "Banner uploaded successfully"}
+
+@api_router.get("/banners")
+async def get_banners():
+    # Get all verified tutors with banners
+    profiles = await db.tutor_profiles.find(
+        {"is_verified": True, "verification_banner": {"$exists": True, "$ne": None}},
+        {"_id": 0, "verification_banner": 1, "user_id": 1}
+    ).to_list(100)
+    
+    # Get user info for each
+    result = []
+    for profile in profiles:
+        user = await db.users.find_one({"id": profile['user_id']}, {"_id": 0, "name": 1})
+        if user and profile.get('verification_banner'):
+            result.append({
+                "banner": profile['verification_banner'],
+                "tutor_name": user['name'],
+                "tutor_id": profile['user_id']
+            })
+    
+    return result
 
 # Auth Routes
 @api_router.post("/auth/register")
