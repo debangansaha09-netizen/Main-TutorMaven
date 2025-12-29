@@ -296,6 +296,7 @@ class StudentProfile(BaseModel):
     school_name: Optional[str] = None
     board: Optional[str] = None  # CBSE, ICSE, STATE BOARD
     subjects_interested: List[str] = []
+    parent_code: str = Field(default_factory=lambda: str(uuid.uuid4())[:8].upper())  # Unique code for parents
 
 class StudentProfileUpdate(BaseModel):
     profile_picture: Optional[str] = None
