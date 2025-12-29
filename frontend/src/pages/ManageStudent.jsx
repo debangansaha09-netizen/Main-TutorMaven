@@ -142,20 +142,45 @@ export default function ManageStudent({ user, logout }) {
               </TabsList>
 
               <TabsContent value="fees" className="space-y-4">
+                {/* Year Selector */}
+                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
+                  <div>
+                    <p className="font-semibold text-gray-900">Select Year</p>
+                    <p className="text-sm text-gray-600">Manage fees for different years</p>
+                  </div>
+                  <div className="flex gap-2">
+                    {yearOptions.map((year) => (
+                      <button
+                        key={year}
+                        type="button"
+                        onClick={() => setSelectedYear(year)}
+                        className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                          selectedYear === year
+                            ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100 border-2 border-gray-200'
+                        }`}
+                        data-testid={`year-${year}-btn`}
+                      >
+                        {year}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* 12 Month Fee Grid */}
                 <div>
-                  <p className="font-medium mb-3">Annual Fee Management</p>
+                  <p className="font-medium mb-3">Fee Management for {selectedYear}</p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                     {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((month, index) => {
                       const monthNum = index + 1;
-                      const existingFee = fees.find(f => f.month === monthNum && f.year === currentYear);
+                      const existingFee = fees.find(f => f.month === monthNum && f.year === selectedYear);
                       const isPaid = existingFee?.status === 'paid';
                       
                       return (
                         <button
                           key={month}
                           type="button"
-                          onClick={() => handleUpdateFee(monthNum, currentYear, isPaid ? 'unpaid' : 'paid')}
+                          onClick={() => handleUpdateFee(monthNum, selectedYear, isPaid ? 'unpaid' : 'paid')}
                           className={`p-4 rounded-xl border-2 transition-all ${
                             isPaid 
                               ? 'bg-gradient-to-br from-green-50 to-green-100 border-green-300 hover:border-green-400' 
@@ -182,7 +207,7 @@ export default function ManageStudent({ user, logout }) {
                       );
                     })}
                   </div>
-                  <p className="text-sm text-gray-500 mt-3">Click on any month to toggle payment status</p>
+                  <p className="text-sm text-gray-500 mt-3">Click on any month to toggle payment status for {selectedYear}</p>
                 </div>
 
                 {/* Fee History */}
