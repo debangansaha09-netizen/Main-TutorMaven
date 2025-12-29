@@ -72,18 +72,36 @@ export default function Auth({ setUser }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
+    <div 
+      className="min-h-screen flex items-center justify-center px-4 relative"
+      style={{
+        backgroundImage: `url('https://customer-assets.emergentagent.com/job_learnhub-498/artifacts/ip50tq76_IMG-20251229-WA0000.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+      
+      <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Welcome to TutorMaven</h1>
-          <p className="text-gray-600 mt-2">Sign in or create an account</p>
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-lg mb-4 border border-white/20">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_b50a8eda-643d-42ca-93a2-b95046836ba5/artifacts/p815m8ok_IMG-20251102-WA0004.jpg" 
+              alt="TutorMaven Logo" 
+              className="h-12 w-12 rounded-full object-cover"
+            />
+          </div>
+          <h1 className="text-4xl font-bold text-white drop-shadow-lg">Welcome to TutorMaven</h1>
+          <p className="text-white/90 mt-2 drop-shadow">Sign in or create an account</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-8">
+        <div className="backdrop-blur-xl bg-white/10 rounded-3xl shadow-2xl p-8 border border-white/20">
           <Tabs defaultValue="login">
-            <TabsList className="grid w-full grid-cols-2" data-testid="auth-tabs">
-              <TabsTrigger value="login" data-testid="login-tab">Login</TabsTrigger>
-              <TabsTrigger value="register" data-testid="register-tab">Register</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-white/20 backdrop-blur-lg" data-testid="auth-tabs">
+              <TabsTrigger value="login" data-testid="login-tab" className="data-[state=active]:bg-white/30">Login</TabsTrigger>
+              <TabsTrigger value="register" data-testid="register-tab" className="data-[state=active]:bg-white/30">Register</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
