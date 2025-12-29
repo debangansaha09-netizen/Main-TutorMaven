@@ -203,6 +203,10 @@ class Notification(BaseModel):
     read: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+class VerificationProof(BaseModel):
+    proof_image: str
+    phone_number: str
+
 class ParentLogin(BaseModel):
     parent_code: str
 
