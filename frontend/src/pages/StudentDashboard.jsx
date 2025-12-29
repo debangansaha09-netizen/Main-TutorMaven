@@ -167,19 +167,19 @@ export default function StudentDashboard({ user, logout }) {
 
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 mb-6 md:mb-8">
-          <div className="flex items-center space-x-4">
-            <Avatar className="h-16 w-16">
+          <div className="flex items-center space-x-3 md:space-x-4">
+            <Avatar className="h-12 w-12 md:h-16 md:w-16">
               <AvatarImage src={user.profile_picture} />
               <AvatarFallback>{user.name[0]}</AvatarFallback>
             </Avatar>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
-              <p className="text-gray-600">Student Dashboard</p>
+              <h1 className="text-xl md:text-2xl font-bold text-gray-900">{user.name}</h1>
+              <p className="text-sm md:text-base text-gray-600">Student Dashboard</p>
             </div>
           </div>
           <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
             <DialogTrigger asChild>
-              <Button data-testid="edit-profile-btn">Edit Profile</Button>
+              <Button data-testid="edit-profile-btn" className="w-full sm:w-auto">Edit Profile</Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
