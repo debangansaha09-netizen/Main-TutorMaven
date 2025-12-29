@@ -298,6 +298,12 @@ async def register(user_data: UserRegister):
         profile_dict = profile.model_dump()
         await db.tutor_profiles.insert_one(profile_dict)
     
+    # Create student profile if role is student
+    if user_data.role == UserRole.STUDENT:
+        student_profile = StudentProfile(user_id=user.id)
+        profile_dict = student_profile.model_dump()
+        await db.student_profiles.insert_one(profile_dict)
+    
     # Create token
     token = create_access_token({"sub": user.id, "role": user.role})
     
