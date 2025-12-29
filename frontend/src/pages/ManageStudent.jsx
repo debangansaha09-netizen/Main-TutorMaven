@@ -138,33 +138,46 @@ export default function ManageStudent({ user, logout }) {
               </TabsList>
 
               <TabsContent value="fees" className="space-y-4">
-                {/* Mark Current Month Fee */}
-                <div className="p-4 bg-blue-50 rounded-lg">
-                  <p className="font-medium mb-3">
-                    Mark Fee for {new Date(currentYear, currentMonth - 1).toLocaleString('default', { month: 'long', year: 'numeric' })}
-                  </p>
-                  <div className="flex space-x-2">
-                    <Button
-                      size="sm"
-                      onClick={() => handleUpdateFee(currentMonth, currentYear, 'paid')}
-                      data-testid="mark-fee-paid-btn"
-                    >
-                      Mark as Paid
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleUpdateFee(currentMonth, currentYear, 'unpaid')}
-                      data-testid="mark-fee-unpaid-btn"
-                    >
-                      Mark as Unpaid
-                    </Button>
+                {/* 12 Month Fee Grid */}
+                <div>
+                  <p className="font-medium mb-3">Annual Fee Management</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((month, index) => {
+                      const monthNum = index + 1;
+                      const existingFee = fees.find(f => f.month === monthNum && f.year === currentYear);
+                      const isPaid = existingFee?.status === 'paid';
+                      
+                      return (
+                        <button
+                          key={month}
+                          type="button"
+                          onClick={() => handleUpdateFee(monthNum, currentYear, isPaid ? 'unpaid' : 'paid')}
+                          className={`p-4 rounded-xl border-2 transition-all ${\n                            isPaid \n                              ? 'bg-gradient-to-br from-green-50 to-green-100 border-green-300 hover:border-green-400' \n                              : 'bg-gradient-to-br from-red-50 to-red-100 border-red-300 hover:border-red-400'\n                          }`}
+                          data-testid={`month-${month.toLowerCase()}-btn`}
+                        >
+                          <div className="text-center">
+                            <p className="text-sm font-semibold text-gray-900">{month}</p>
+                            <div className="mt-2">
+                              {isPaid ? (
+                                <CheckCircle className="w-6 h-6 text-green-600 mx-auto" />
+                              ) : (
+                                <X className="w-6 h-6 text-red-600 mx-auto" />
+                              )}
+                            </div>
+                            <p className={`text-xs mt-1 font-medium ${\n                              isPaid ? 'text-green-700' : 'text-red-700'\n                            }`}>
+                              {isPaid ? 'Paid' : 'Unpaid'}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
+                  <p className="text-sm text-gray-500 mt-3">Click on any month to toggle payment status</p>
                 </div>
 
                 {/* Fee History */}
                 <div>
-                  <p className="font-medium mb-3">Fee History</p>
+                  <p className="font-medium mb-3">Payment History</p>
                   {fees.length > 0 ? (
                     <div className="space-y-2">
                       {fees.map((fee) => (
