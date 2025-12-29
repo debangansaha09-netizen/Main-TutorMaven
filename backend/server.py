@@ -457,11 +457,12 @@ async def submit_verification(proof: VerificationProof, current_user: dict = Dep
         {"user_id": current_user['id']},
         {"$set": {
             "verification_proof": proof.proof_image,
+            "verification_phone": proof.phone_number,
             "verification_status": VerificationStatus.PENDING
         }}
     )
     
-    return {"message": "Verification submitted successfully"}
+    return {"message": "Verification submitted successfully. Admin will review within 24-48 hours."}
 
 @api_router.get("/tutors/stats/me")
 async def get_tutor_stats(current_user: dict = Depends(get_current_user)):
