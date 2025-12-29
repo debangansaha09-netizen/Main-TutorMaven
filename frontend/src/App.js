@@ -104,6 +104,7 @@ function App() {
           <Route path="/notifications" element={user ? <Notifications user={user} logout={logout} /> : <Navigate to="/auth" />} />
           <Route path="/my-learning" element={user ? <MyLearning user={user} logout={logout} /> : <Navigate to="/auth" />} />
           <Route path="/manage-student/:subscriptionId" element={user ? <ManageStudent user={user} logout={logout} /> : <Navigate to="/auth" />} />
+          <Route path="/verification" element={user ? <VerificationBenefits user={user} logout={logout} /> : <Navigate to="/auth" />} />
         </Routes>
       </BrowserRouter>
     </div>
