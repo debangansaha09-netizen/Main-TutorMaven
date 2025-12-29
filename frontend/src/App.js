@@ -8,6 +8,7 @@ import './App.css';
 import Landing from './pages/Landing';
 import Auth from './pages/Auth';
 import AdminLogin from './pages/AdminLogin';
+import ParentLogin from './pages/ParentLogin';
 import TutorDashboard from './pages/TutorDashboard';
 import StudentDashboard from './pages/StudentDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -18,6 +19,7 @@ import Settings from './pages/Settings';
 import Notifications from './pages/Notifications';
 import MyLearning from './pages/MyLearning';
 import ManageStudent from './pages/ManageStudent';
+import VerificationBenefits from './pages/VerificationBenefits';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
