@@ -78,6 +78,7 @@ function App() {
           <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Landing />} />
           <Route path="/auth" element={user ? <Navigate to="/dashboard" /> : <Auth setUser={setUser} />} />
           <Route path="/admin" element={user?.role === 'admin' ? <Navigate to="/dashboard" /> : <AdminLogin setUser={setUser} />} />
+          <Route path="/parent" element={<ParentLogin />} />
           
           <Route
             path="/dashboard"
