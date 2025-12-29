@@ -396,46 +396,11 @@ export default function TutorDashboard({ user, logout }) {
             </Dialog>
 
             {!profile.is_verified && profile.verification_status !== 'pending' && (
-              <Dialog open={verifyDialogOpen} onOpenChange={setVerifyDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="outline" data-testid="get-verified-btn">Get Verified</Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Get Verified Badge</DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-4">
-                    <p className="text-sm text-gray-600">Upload proof of ₹49 payment to get verified</p>
-                    <div>
-                      <Label>Payment Proof</Label>
-                      <div className="mt-2">
-                        <label htmlFor="verification-proof" className="cursor-pointer">
-                          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 transition-colors">
-                            {verificationProof ? (
-                              <img src={verificationProof} alt="Proof" className="w-32 h-32 mx-auto object-cover rounded-lg" />
-                            ) : (
-                              <div>
-                                <Upload className="w-8 h-8 mx-auto text-gray-400" />
-                                <p className="text-sm text-gray-600 mt-2">Click to upload</p>
-                              </div>
-                            )}
-                          </div>
-                        </label>
-                        <input
-                          id="verification-proof"
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) => handleImageUpload(e, 'verification_proof')}
-                        />
-                      </div>
-                    </div>
-                    <Button onClick={handleSubmitVerification} className="w-full" data-testid="submit-verification-btn">
-                      Submit for Verification
-                    </Button>
-                  </div>
-                </DialogContent>
-              </Dialog>
+              <Link to="/verification">
+                <Button variant="outline" data-testid="get-verified-btn">
+                  Get Verified - ₹99
+                </Button>
+              </Link>
             )}
 
             {profile.verification_status === 'pending' && (
