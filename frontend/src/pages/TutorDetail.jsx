@@ -10,7 +10,7 @@ import { Button } from '../components/ui/button';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
-import { ArrowLeft, CheckCircle, MapPin, Phone, GraduationCap, Calendar, Clock, Star } from 'lucide-react';
+import { ArrowLeft, CheckCircle, MapPin, Phone, GraduationCap, Calendar, Clock, Star, X } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
