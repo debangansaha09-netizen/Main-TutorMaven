@@ -57,6 +57,26 @@ export default function HelpSupport({ user, logout }) {
 
         <Card>
           <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-red-600">
+              <MessageCircle className="w-6 h-6" />
+              <span>Important Disclaimer</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="p-4 bg-red-50 border-2 border-red-200 rounded-lg">
+              <p className="text-red-900 font-semibold mb-2">⚠️ Safety and Responsibility Notice</p>
+              <p className="text-red-800 text-sm leading-relaxed">
+                TutorMaven is a platform that connects students with tutors. We are <strong>NOT responsible for any kind of misbehavior</strong>, 
+                misconduct, or disputes between tutors and students. All users are responsible for their own actions and interactions. 
+                We strongly recommend meeting in public places and informing parents/guardians about all tutoring arrangements. 
+                Please report any inappropriate behavior to authorities immediately.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <MessageCircle className="w-6 h-6" />
               <span>Quick Guide</span>
