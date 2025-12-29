@@ -48,8 +48,13 @@ export default function StudentDashboard({ user, logout }) {
           ...prev,
           school_name: response.data.school_name || '',
           board: response.data.board || '',
-          subjects_interested: response.data.subjects_interested || []
+          subjects_interested: response.data.subjects_interested || [],
+          parent_code: response.data.parent_code || ''
         }));
+      } else {
+        // Create profile if doesn't exist
+        await axios.put(`${API}/students/profile`, {});
+        fetchStudentProfile();
       }
     } catch (error) {
       console.error('Error fetching student profile:', error);
