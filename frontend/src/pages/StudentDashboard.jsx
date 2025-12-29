@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
-import { BookOpen, Calendar, CheckCircle, Upload } from 'lucide-react';
+import { BookOpen, Calendar, CheckCircle, Upload, Users } from 'lucide-react';
 import { Label } from '../components/ui/label';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
