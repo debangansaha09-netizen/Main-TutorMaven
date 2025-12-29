@@ -78,7 +78,7 @@ export default function FindTutors({ user, logout }) {
                         <div className="flex items-center space-x-2 mb-1">
                           <h3 className="font-bold text-lg">{tutor.user?.name}</h3>
                           {tutor.is_verified && (
-                            <CheckCircle className="w-5 h-5 text-green-500" data-testid={`verified-${tutor.user_id}`} />
+                            <CheckCircle className="w-5 h-5 text-blue-500" data-testid={`verified-${tutor.user_id}`} />
                           )}
                         </div>
                         {tutor.avg_rating > 0 && (
