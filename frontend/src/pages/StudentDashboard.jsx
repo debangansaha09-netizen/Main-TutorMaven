@@ -276,7 +276,7 @@ export default function StudentDashboard({ user, logout }) {
                         <div className="flex items-center space-x-2">
                           <p className="font-medium">{sub.tutor?.name}</p>
                           {sub.tutor_profile?.is_verified && (
-                            <CheckCircle className="w-4 h-4 text-green-500" />
+                            <CheckCircle className="w-4 h-4 text-blue-500" />
                           )}
                         </div>
                         <p className="text-sm text-gray-600">
