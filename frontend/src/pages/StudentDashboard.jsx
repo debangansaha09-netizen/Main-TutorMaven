@@ -63,6 +63,15 @@ export default function StudentDashboard({ user, logout }) {
     }
   };
 
+  const fetchBanners = async () => {
+    try {
+      const response = await axios.get(`${API}/banners`);
+      setBanners(response.data);
+    } catch (error) {
+      console.error('Error fetching banners:', error);
+    }
+  };
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
