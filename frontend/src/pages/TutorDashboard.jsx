@@ -84,8 +84,6 @@ export default function TutorDashboard({ user, logout }) {
       reader.onloadend = () => {
         if (field === 'coaching_photo') {
           setFormData({ ...formData, coaching_photo: reader.result });
-        } else if (field === 'verification_proof') {
-          setVerificationProof(reader.result);
         } else if (field === 'profile_picture') {
           setFormData({ ...formData, profile_picture: reader.result });
         }
