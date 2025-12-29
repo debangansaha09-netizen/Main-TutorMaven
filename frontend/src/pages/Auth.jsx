@@ -139,7 +139,7 @@ export default function Auth({ setUser }) {
             <TabsContent value="register">
               <form onSubmit={handleRegister} className="space-y-4">
                 <div>
-                  <Label htmlFor="register-name">Full Name</Label>
+                  <Label htmlFor="register-name" className="text-white">Full Name</Label>
                   <Input
                     id="register-name"
                     type="text"
@@ -147,10 +147,11 @@ export default function Auth({ setUser }) {
                     value={registerData.name}
                     onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
                     required
+                    className="bg-white/20 backdrop-blur-lg border-white/30 text-white placeholder:text-white/60"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="register-email">Email</Label>
+                  <Label htmlFor="register-email" className="text-white">Email</Label>
                   <Input
                     id="register-email"
                     type="email"
@@ -158,10 +159,11 @@ export default function Auth({ setUser }) {
                     value={registerData.email}
                     onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                     required
+                    className="bg-white/20 backdrop-blur-lg border-white/30 text-white placeholder:text-white/60"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="register-password">Password</Label>
+                  <Label htmlFor="register-password" className="text-white">Password</Label>
                   <Input
                     id="register-password"
                     type="password"
@@ -169,36 +171,38 @@ export default function Auth({ setUser }) {
                     value={registerData.password}
                     onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                     required
+                    className="bg-white/20 backdrop-blur-lg border-white/30 text-white placeholder:text-white/60"
                   />
                 </div>
                 <div>
-                  <Label>I am a</Label>
+                  <Label className="text-white">I am a</Label>
                   <RadioGroup
                     value={registerData.role}
                     onValueChange={(value) => setRegisterData({ ...registerData, role: value })}
                     data-testid="role-radio-group"
+                    className="mt-2"
                   >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="student" id="student" data-testid="student-radio" />
-                      <Label htmlFor="student" className="font-normal">Student</Label>
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-white/10 backdrop-blur-lg border border-white/20">
+                      <RadioGroupItem value="student" id="student" data-testid="student-radio" className="border-white text-white" />
+                      <Label htmlFor="student" className="font-normal text-white cursor-pointer">Student</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="tutor" id="tutor" data-testid="tutor-radio" />
-                      <Label htmlFor="tutor" className="font-normal">Tutor</Label>
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-white/10 backdrop-blur-lg border border-white/20">
+                      <RadioGroupItem value="tutor" id="tutor" data-testid="tutor-radio" className="border-white text-white" />
+                      <Label htmlFor="tutor" className="font-normal text-white cursor-pointer">Tutor</Label>
                     </div>
                   </RadioGroup>
                 </div>
                 <div>
-                  <Label htmlFor="profile-picture">Profile Picture (Optional)</Label>
+                  <Label htmlFor="profile-picture" className="text-white">Profile Picture (Optional)</Label>
                   <div className="mt-2">
                     <label htmlFor="profile-upload" className="cursor-pointer">
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 transition-colors">
+                      <div className="border-2 border-dashed border-white/30 rounded-lg p-4 text-center hover:border-white/50 hover:bg-white/10 transition-colors backdrop-blur-lg">
                         {registerData.profile_picture ? (
                           <img src={registerData.profile_picture} alt="Profile" className="w-20 h-20 rounded-full mx-auto object-cover" />
                         ) : (
                           <div>
-                            <Upload className="w-8 h-8 mx-auto text-gray-400" />
-                            <p className="text-sm text-gray-600 mt-2">Click to upload</p>
+                            <Upload className="w-8 h-8 mx-auto text-white/70" />
+                            <p className="text-sm text-white/80 mt-2">Click to upload</p>
                           </div>
                         )}
                       </div>
@@ -213,7 +217,7 @@ export default function Auth({ setUser }) {
                     />
                   </div>
                 </div>
-                <Button type="submit" className="w-full" disabled={loading} data-testid="register-submit-btn">
+                <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700" disabled={loading} data-testid="register-submit-btn">
                   {loading ? 'Creating account...' : 'Create Account'}
                 </Button>
               </form>
@@ -221,9 +225,12 @@ export default function Auth({ setUser }) {
           </Tabs>
         </div>
 
-        <div className="text-center mt-6">
-          <a href="/admin" className="text-sm text-blue-600 hover:underline" data-testid="admin-login-link">
+        <div className="text-center mt-6 space-y-2">
+          <a href="/admin" className="block text-sm text-white/90 hover:text-white hover:underline drop-shadow" data-testid="admin-login-link">
             Admin Login
+          </a>
+          <a href="/parent" className="block text-sm text-white/90 hover:text-white hover:underline drop-shadow" data-testid="parent-login-link">
+            Parent Access Portal
           </a>
         </div>
       </div>
