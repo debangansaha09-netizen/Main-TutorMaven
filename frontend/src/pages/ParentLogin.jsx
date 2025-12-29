@@ -117,17 +117,109 @@ function ParentDashboard({ data, onLogout }) {
         </CardContent>
       </Card>
 
+      {/* Subscription Details with Fees and Attendance */}
       <Card className="backdrop-blur-lg bg-white/80 shadow-2xl border-0">
         <CardHeader>
-          <CardTitle>Active Tutors</CardTitle>
+          <CardTitle>Active Tutors & Progress</CardTitle>
         </CardHeader>
         <CardContent>
           {data.subscriptions.length > 0 ? (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {data.subscriptions.map((sub) => (
-                <div key={sub.id} className="p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
-                  <p className="font-semibold text-gray-900">Subscription Active</p>
-                  <p className="text-sm text-gray-600 mt-1">View detailed attendance and fee records in the student's dashboard</p>
+                <div key={sub.id} className="border-2 border-gray-200 rounded-xl p-4 md:p-6 bg-gradient-to-br from-gray-50 to-white">
+                  {/* Tutor Info */}
+                  <div className="flex items-center space-x-4 mb-4 pb-4 border-b">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold">
+                      {sub.tutor?.name[0]}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900">{sub.tutor?.name}</h3>
+                      <p className="text-sm text-gray-600">
+                        {sub.tutor_profile?.subjects?.join(', ')} • ₹{sub.tutor_profile?.monthly_fee}/month
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Fees and Attendance Tabs */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Fees */}
+                    <div className="bg-white rounded-lg p-4 border-2 border-green-200">
+                      <h4 className="font-bold text-gray-900 mb-3 flex items-center">
+                        <span className="text-green-600 mr-2">💰</span>
+                        Fee Status
+                      </h4>
+                      {sub.fees && sub.fees.length > 0 ? (
+                        <div className="space-y-2 max-h-64 overflow-y-auto">
+                          {sub.fees.map((fee) => (
+                            <div key={fee.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                              <span className="text-sm font-medium">
+                                {new Date(fee.year, fee.month - 1).toLocaleString('default', { month: 'short', year: 'numeric' })}
+                              </span>
+                              <span className={`text-xs font-bold px-2 py-1 rounded ${
+                                fee.status === 'paid' 
+                                  ? 'bg-green-100 text-green-700' 
+                                  : 'bg-red-100 text-red-700'
+                              }`}>
+                                {fee.status.toUpperCase()}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-500 text-center py-4">No fee records yet</p>
+                      )}
+                    </div>
+
+                    {/* Attendance */}
+                    <div className="bg-white rounded-lg p-4 border-2 border-blue-200">
+                      <h4 className="font-bold text-gray-900 mb-3 flex items-center">
+                        <span className="text-blue-600 mr-2">📅</span>
+                        Attendance
+                      </h4>
+                      {sub.attendance && sub.attendance.length > 0 ? (
+                        <div className="space-y-2 max-h-64 overflow-y-auto">
+                          {sub.attendance.slice(-10).reverse().map((att) => (
+                            <div key={att.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                              <span className="text-sm font-medium">
+                                {new Date(att.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                              </span>
+                              <span className={`text-xs font-bold px-2 py-1 rounded ${
+                                att.status === 'present' 
+                                  ? 'bg-green-100 text-green-700' 
+                                  : 'bg-gray-100 text-gray-700'
+                              }`}>
+                                {att.status.toUpperCase()}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-500 text-center py-4">No attendance records yet</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Summary Stats */}
+                  <div className="mt-4 pt-4 border-t grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <p className="text-2xl font-bold text-green-600">
+                        {sub.fees?.filter(f => f.status === 'paid').length || 0}
+                      </p>
+                      <p className="text-xs text-gray-600">Fees Paid</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-red-600">
+                        {sub.fees?.filter(f => f.status === 'unpaid').length || 0}
+                      </p>
+                      <p className="text-xs text-gray-600">Fees Unpaid</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-blue-600">
+                        {sub.attendance?.filter(a => a.status === 'present').length || 0}
+                      </p>
+                      <p className="text-xs text-gray-600">Days Present</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
