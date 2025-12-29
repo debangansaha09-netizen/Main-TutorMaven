@@ -193,12 +193,9 @@ class TutorMavenAPITester:
         success, response = self.run_test(
             "Add Class",
             "POST",
-            "classes",
+            "classes?class_range=9-10",
             200,
-            data={
-                "class_range": "9-10",
-                "subjects": ["Mathematics", "Physics"]
-            },
+            data=["Mathematics", "Physics"],
             token_key='tutor'
         )
         return success
