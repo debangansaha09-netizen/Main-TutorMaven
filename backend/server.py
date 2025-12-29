@@ -139,7 +139,7 @@ class TutorProfile(BaseModel):
     is_verified: bool = False
     verification_proof: Optional[str] = None
     verification_phone: Optional[str] = None
-    verification_status: VerificationStatus = VerificationStatus.PENDING
+    verification_status: VerificationStatus = VerificationStatus.REJECTED  # Default to rejected so button shows
     verification_banner: Optional[str] = None  # Banner for verified tutors
     reach_count: int = 0
     subscriber_count: int = 0
