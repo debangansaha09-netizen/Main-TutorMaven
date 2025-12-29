@@ -22,7 +22,8 @@ export default function StudentDashboard({ user, logout }) {
     name: user.name || '',
     school_name: '',
     board: '',
-    subjects_interested: []
+    subjects_interested: [],
+    parent_code: ''
   });
 
   useEffect(() => {
