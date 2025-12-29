@@ -184,7 +184,7 @@ export default function TutorDashboard({ user, logout }) {
               <div className="flex items-center space-x-2">
                 <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
                 {profile.is_verified && (
-                  <CheckCircle className="w-6 h-6 text-green-500" data-testid="verified-badge" />
+                  <CheckCircle className="w-6 h-6 text-blue-500" data-testid="verified-badge" />
                 )}
               </div>
               <p className="text-gray-600">Tutor Dashboard</p>
