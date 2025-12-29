@@ -21,11 +21,15 @@ export default function ManageStudent({ user, logout }) {
   const [fees, setFees] = useState([]);
   const [attendance, setAttendance] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   // For marking new records
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
   const today = new Date().toISOString().split('T')[0];
+
+  // Generate year options (current year and previous 2 years)
+  const yearOptions = [currentYear, currentYear - 1, currentYear - 2];
 
   useEffect(() => {
     fetchData();
