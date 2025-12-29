@@ -376,16 +376,18 @@ export default function TutorDashboard({ user, logout }) {
               </DialogContent>
             </Dialog>
 
-            {!profile.is_verified && profile.verification_status !== 'pending' && (
-              <Link to="/verification">
-                <Button variant="outline" data-testid="get-verified-btn">
-                  Get Verified - ₹99
-                </Button>
-              </Link>
-            )}
-
-            {profile.verification_status === 'pending' && (
-              <Badge variant="secondary" data-testid="verification-pending-badge">Verification Pending</Badge>
+            {!profile.is_verified && (
+              profile.verification_status === 'pending' ? (
+                <Badge variant="secondary" data-testid="verification-pending-badge" className="px-4 py-2">
+                  Verification Pending
+                </Badge>
+              ) : (
+                <Link to="/verification">
+                  <Button variant="outline" className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 border-0" data-testid="get-verified-btn">
+                    Get Verified - ₹99
+                  </Button>
+                </Link>
+              )
             )}
           </div>
         </div>
