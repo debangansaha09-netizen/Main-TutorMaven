@@ -220,16 +220,37 @@ async def parent_login(credentials: ParentLogin):
     # Get student user data
     student = await db.users.find_one({"id": student_profile['user_id']}, {"_id": 0, "password_hash": 0})
     
-    # Get subscriptions
+    # Get subscriptions with fees and attendance
     subscriptions = await db.subscriptions.find(
         {"student_id": student_profile['user_id'], "status": SubscriptionStatus.ACTIVE},
         {"_id": 0}
     ).to_list(1000)
     
+    # Fetch fees and attendance for each subscription
+    subscription_details = []
+    for sub in subscriptions:
+        # Get tutor info
+        tutor = await db.users.find_one({"id": sub['tutor_id']}, {"_id": 0, "password_hash": 0})
+        tutor_profile = await db.tutor_profiles.find_one({"user_id": sub['tutor_id']}, {"_id": 0})
+        
+        # Get fees
+        fees = await db.fee_records.find({"subscription_id": sub['id']}, {"_id": 0}).to_list(1000)
+        
+        # Get attendance
+        attendance = await db.attendance_records.find({"subscription_id": sub['id']}, {"_id": 0}).to_list(1000)
+        
+        subscription_details.append({
+            **sub,
+            "tutor": tutor,
+            "tutor_profile": tutor_profile,
+            "fees": fees,
+            "attendance": attendance
+        })
+    
     return {
         "student": student,
         "student_profile": student_profile,
-        "subscriptions": subscriptions
+        "subscriptions": subscription_details
     }
 
 @api_router.post("/tutors/banner")
