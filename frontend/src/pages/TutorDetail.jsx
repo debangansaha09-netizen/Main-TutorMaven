@@ -310,9 +310,22 @@ export default function TutorDetail({ user, logout }) {
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
                           <p className="font-medium">{review.student?.name}</p>
-                          <div className="flex items-center space-x-1">
-                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm font-medium">{review.rating}</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-1">
+                              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                              <span className="text-sm font-medium">{review.rating}</span>
+                            </div>
+                            {user.role === 'student' && review.student_id === user.id && (
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                onClick={() => handleDeleteReview(review.id)}
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                data-testid={`delete-review-${review.id}`}
+                              >
+                                <X className="w-4 h-4" />
+                              </Button>
+                            )}
                           </div>
                         </div>
                         <p className="text-gray-700 mt-2">{review.comment}</p>
