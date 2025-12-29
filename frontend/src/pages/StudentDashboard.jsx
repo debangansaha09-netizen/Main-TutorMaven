@@ -81,6 +81,24 @@ export default function StudentDashboard({ user, logout }) {
   return (
     <Layout user={user}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-testid="student-dashboard">
+        {/* Parent Code Card */}
+        <Card className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600 font-semibold">Your Parent Access Code</p>
+                <p className="text-3xl font-mono font-bold text-blue-600 tracking-wider mt-2">
+                  {formData.parent_code || 'Loading...'}
+                </p>
+                <p className="text-xs text-gray-500 mt-2">Share this code with your parents to give them access to your progress</p>
+              </div>
+              <div className="p-4 bg-white rounded-xl shadow-md">
+                <Users className="w-12 h-12 text-blue-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
