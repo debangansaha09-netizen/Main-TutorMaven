@@ -116,6 +116,36 @@ export default function StudentDashboard({ user, logout }) {
           </CardContent>
         </Card>
 
+        {/* Verified Tutor Banners */}
+        {banners.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Featured Verified Tutors</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {banners.map((banner, index) => (
+                <Link key={index} to={`/tutor/${banner.tutor_id}`}>
+                  <Card className="overflow-hidden hover:shadow-2xl transition-all cursor-pointer group">
+                    <div className="relative h-48">
+                      <img 
+                        src={banner.banner} 
+                        alt={`${banner.tutor_name}'s Banner`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <p className="text-white font-bold text-lg drop-shadow-lg">{banner.tutor_name}</p>
+                          <CheckCircle className="w-5 h-5 text-blue-400" />
+                        </div>
+                        <Badge className="bg-blue-500 text-white">Verified</Badge>
+                      </div>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
