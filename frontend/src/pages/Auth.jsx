@@ -72,33 +72,46 @@ export default function Auth({ setUser }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-3 sm:px-4 py-6">
-      <div className="w-full max-w-md">
+    <div 
+      className="min-h-screen flex items-center justify-center px-3 sm:px-4 py-6 relative"
+      style={{
+        backgroundImage: `url('https://customer-assets.emergentagent.com/job_learnhub-498/artifacts/ip50tq76_IMG-20251229-WA0000.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Dark overlay for better readability */}
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]" />
+      
+      <div className="w-full max-w-md relative z-10">
+        {/* Header with glassmorphic effect */}
         <div className="text-center mb-6 md:mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 mb-3 md:mb-4 shadow-xl">
+          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-md mb-3 md:mb-4 shadow-xl border border-white/30">
             <img 
               src="https://customer-assets.emergentagent.com/job_b50a8eda-643d-42ca-93a2-b95046836ba5/artifacts/p815m8ok_IMG-20251102-WA0004.jpg" 
               alt="TutorMaven Logo" 
               className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover"
             />
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent px-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-lg px-2">
             Welcome to TutorMaven
           </h1>
-          <p className="text-sm md:text-base text-gray-600 mt-2">Sign in or create an account</p>
+          <p className="text-sm md:text-base text-white/90 mt-2 drop-shadow">Sign in or create an account</p>
         </div>
 
-        <div className="bg-white rounded-2xl md:rounded-3xl shadow-2xl p-5 sm:p-6 md:p-8 border border-gray-100">
+        {/* Glassmorphic Card */}
+        <div className="backdrop-blur-xl bg-white/20 rounded-2xl md:rounded-3xl shadow-2xl p-5 sm:p-6 md:p-8 border border-white/30">
           <Tabs defaultValue="login">
-            <TabsList className="grid w-full grid-cols-2" data-testid="auth-tabs">
-              <TabsTrigger value="login" data-testid="login-tab">Login</TabsTrigger>
-              <TabsTrigger value="register" data-testid="register-tab">Register</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-white/20 backdrop-blur-md" data-testid="auth-tabs">
+              <TabsTrigger value="login" className="data-[state=active]:bg-white/40 data-[state=active]:text-gray-900 text-white/90" data-testid="login-tab">Login</TabsTrigger>
+              <TabsTrigger value="register" className="data-[state=active]:bg-white/40 data-[state=active]:text-gray-900 text-white/90" data-testid="register-tab">Register</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
               <form onSubmit={handleLogin} className="space-y-4 mt-4">
                 <div>
-                  <Label htmlFor="login-email">Email</Label>
+                  <Label htmlFor="login-email" className="text-white font-medium">Email</Label>
                   <Input
                     id="login-email"
                     type="email"
@@ -106,11 +119,12 @@ export default function Auth({ setUser }) {
                     value={loginData.email}
                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                     required
-                    className="mt-1"
+                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    placeholder="Enter your email"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="login-password">Password</Label>
+                  <Label htmlFor="login-password" className="text-white font-medium">Password</Label>
                   <Input
                     id="login-password"
                     type="password"
@@ -118,12 +132,13 @@ export default function Auth({ setUser }) {
                     value={loginData.password}
                     onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                     required
-                    className="mt-1"
+                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    placeholder="Enter your password"
                   />
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700" 
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg" 
                   disabled={loading} 
                   data-testid="login-submit-btn"
                 >
@@ -135,7 +150,7 @@ export default function Auth({ setUser }) {
             <TabsContent value="register">
               <form onSubmit={handleRegister} className="space-y-4 mt-4">
                 <div>
-                  <Label htmlFor="register-name">Full Name</Label>
+                  <Label htmlFor="register-name" className="text-white font-medium">Full Name</Label>
                   <Input
                     id="register-name"
                     type="text"
@@ -143,11 +158,12 @@ export default function Auth({ setUser }) {
                     value={registerData.name}
                     onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
                     required
-                    className="mt-1"
+                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    placeholder="Enter your full name"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="register-email">Email</Label>
+                  <Label htmlFor="register-email" className="text-white font-medium">Email</Label>
                   <Input
                     id="register-email"
                     type="email"
@@ -155,11 +171,12 @@ export default function Auth({ setUser }) {
                     value={registerData.email}
                     onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                     required
-                    className="mt-1"
+                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    placeholder="Enter your email"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="register-password">Password</Label>
+                  <Label htmlFor="register-password" className="text-white font-medium">Password</Label>
                   <Input
                     id="register-password"
                     type="password"
@@ -167,38 +184,39 @@ export default function Auth({ setUser }) {
                     value={registerData.password}
                     onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                     required
-                    className="mt-1"
+                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    placeholder="Create a password"
                   />
                 </div>
                 <div>
-                  <Label>I am a</Label>
+                  <Label className="text-white font-medium">I am a</Label>
                   <RadioGroup
                     value={registerData.role}
                     onValueChange={(value) => setRegisterData({ ...registerData, role: value })}
                     data-testid="role-radio-group"
                     className="mt-2 space-y-2"
                   >
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-blue-50 transition-colors">
-                      <RadioGroupItem value="student" id="student" data-testid="student-radio" />
-                      <Label htmlFor="student" className="font-normal cursor-pointer flex-1">Student</Label>
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-colors">
+                      <RadioGroupItem value="student" id="student" data-testid="student-radio" className="border-white text-white" />
+                      <Label htmlFor="student" className="font-normal cursor-pointer flex-1 text-white">Student</Label>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-purple-50 transition-colors">
-                      <RadioGroupItem value="tutor" id="tutor" data-testid="tutor-radio" />
-                      <Label htmlFor="tutor" className="font-normal cursor-pointer flex-1">Tutor</Label>
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-colors">
+                      <RadioGroupItem value="tutor" id="tutor" data-testid="tutor-radio" className="border-white text-white" />
+                      <Label htmlFor="tutor" className="font-normal cursor-pointer flex-1 text-white">Tutor</Label>
                     </div>
                   </RadioGroup>
                 </div>
                 <div>
-                  <Label htmlFor="profile-picture">Profile Picture (Optional)</Label>
+                  <Label htmlFor="profile-picture" className="text-white font-medium">Profile Picture (Optional)</Label>
                   <div className="mt-2">
                     <label htmlFor="profile-upload" className="cursor-pointer">
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 transition-colors">
+                      <div className="border-2 border-dashed border-white/40 rounded-lg p-4 text-center hover:border-white/60 hover:bg-white/10 transition-colors backdrop-blur-sm">
                         {registerData.profile_picture ? (
-                          <img src={registerData.profile_picture} alt="Profile" className="w-20 h-20 rounded-full mx-auto object-cover" />
+                          <img src={registerData.profile_picture} alt="Profile" className="w-20 h-20 rounded-full mx-auto object-cover border-2 border-white/40" />
                         ) : (
                           <div>
-                            <Upload className="w-8 h-8 mx-auto text-gray-400" />
-                            <p className="text-sm text-gray-600 mt-2">Click to upload</p>
+                            <Upload className="w-8 h-8 mx-auto text-white/70" />
+                            <p className="text-sm text-white/80 mt-2">Click to upload</p>
                           </div>
                         )}
                       </div>
@@ -215,7 +233,7 @@ export default function Auth({ setUser }) {
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700" 
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg" 
                   disabled={loading} 
                   data-testid="register-submit-btn"
                 >
@@ -226,11 +244,12 @@ export default function Auth({ setUser }) {
           </Tabs>
         </div>
 
+        {/* Footer Links */}
         <div className="text-center mt-6 space-y-2">
-          <a href="/admin" className="block text-sm text-gray-600 hover:text-blue-600 hover:underline" data-testid="admin-login-link">
+          <a href="/admin" className="block text-sm text-white/90 hover:text-white hover:underline drop-shadow transition-colors" data-testid="admin-login-link">
             Admin Login
           </a>
-          <a href="/parent" className="block text-sm text-gray-600 hover:text-blue-600 hover:underline" data-testid="parent-login-link">
+          <a href="/parent" className="block text-sm text-white/90 hover:text-white hover:underline drop-shadow transition-colors" data-testid="parent-login-link">
             Parent Access Portal
           </a>
         </div>
