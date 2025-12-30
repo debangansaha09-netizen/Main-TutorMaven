@@ -1,0 +1,218 @@
+<analysis>**original_problem_statement**:
+The user wants to build a full-stack web app called TutorMaven.
+
+**PRODUCT REQUIREMENTS:**
+
+*   **Platform**: Full-stack web app (React + FastAPI + MongoDB).
+*   **Core Features**:
+    *   **Authentication**: JWT-based register/login for Tutors and Students.
+    *   **Tutor Profiles**: Profile photo, bio, subjects, fee, education, address, coaching center photo, teaching days, and hours per day.
+    *   **Student Features**: Student profiles, browse tutors, monthly subscription model, ability to review tutors.
+    *   **Subscription Flow**: Tutors can accept/reject student subscription requests.
+    *   **Verified Tutors**: A ₹99 lifetime verification feature where tutors provide a phone number for admin approval, which grants them a blue checkmark badge and the ability to upload a promotional banner.
+    *   **Admin Panel**: Login with a password (653165), manage users (delete), approve/reject verifications, and view stats.
+    *   **Parent Portal**: Parents can log in using a unique code from their child's profile to view their fees and attendance records.
+    *   **Fees & Attendance**: Tutors can mark monthly fees as Paid/Unpaid for each student (with a year selector) and mark daily attendance. Students and parents can view this status.
+*   **Frontend Design**:
+    *   Light, clean, Apple-inspired UI (white/gray tones, rounded corners).
+    *   Glassmorphic and sleek design elements.
+    *   A specific image should be used as the background for the login page.
+    *   Mobile-first, fast, and responsive.
+    *   Bottom navigation bar on mobile: Home, Find Tutors, Help & Support, Settings.
+*   **Real-time Updates**: Use WebSockets for notifications (e.g., subscription changes, verification status).
+*   **Specific Instructions**:
+    *   No Made with Emergent watermark.
+    *   Help & Support page must include specific contact details and a disclaimer about user conduct.
+    *   Admin login should be password-only.
+
+**User's preferred language**: English
+
+**what currently exists?**
+A full-stack application (FastAPI backend, React frontend, MongoDB) has been developed. Key features are implemented, including user authentication (Tutors, Students, Admin), profile management, a tutor verification system, a parent login portal, and fee/attendance tracking. The UI has been styled with a responsive, Apple-inspired, and partially glassmorphic design. The backend includes endpoints for all major functionalities.
+
+**Last working item**:
+*   **Last item agent was working**: The agent was addressing a user request to add a year selector to the fee management page and to ensure the parent access portal correctly displays the student's fee and attendance information.
+*   **Status**: USER VERIFICATION PENDING
+*   **Agent Testing Done**: Y
+*   **Which testing method agent to use?**: both
+*   **User Testing Done**: N
+
+**All Pending/In progress Issue list**:
+*   **Issue 1**: Parent portal data display is unverified (P0)
+*   **Issue 2**: Add Class functionality for tutors is unverified (P1)
+*   **Issue 3**: Auth page UI regression (P2)
+*   **Issue 4**: General UI inconsistencies across the app (P3)
+
+**Issues Detail**:
+*   **Issue 1**: Parent portal data display is unverified
+    *   **Attempted fixes**: The agent created the backend endpoint and frontend UI to display data. A test was performed, but it showed No active subscriptions, which the agent assumed was correct for the test user. This does not confirm the feature works when a subscription exists.
+    *   **Next debug checklist**:
+        1.  Create a comprehensive test flow: Register a tutor and a student.
+        2.  Have the student subscribe to the tutor.
+        3.  Log in as the tutor and mark attendance and fee status for the student.
+        4.  Log in as the parent using the student's code and verify that the attendance and fee data are displayed correctly.
+        5.  Check  to ensure it correctly fetches and renders the data from the  endpoint.
+        6.  Verify the backend endpoint in  correctly aggregates and returns fee and attendance data.
+    *   **Why fix this issue and what will be achieved with the fix?**: This is a core feature requested by the user, allowing parents to monitor their child's academic engagement and payments.
+    *   **Status**: USER VERIFICATION PENDING
+    *   **Is recurring issue?**: N
+    *   **Should Test frontend/backend/both after fix?**: both
+    *   **Blocked on other issue**: None
+
+*   **Issue 2**: Add Class functionality for tutors is unverified
+    *   **Attempted fixes**: The user reported this issue. The agent reviewed the code in  and  and concluded it seemed correct, but no end-to-end test was performed.
+    *   **Next debug checklist**:
+        1.  Log in as a tutor.
+        2.  Navigate to the Edit Profile section.
+        3.  Attempt to add a new class with a subject and class range.
+        4.  Save the profile and verify the new class is displayed on the tutor's profile.
+        5.  Check the browser's network tab to ensure the PATCH request to  is sent with the correct payload.
+    *   **Why fix this issue and what will be achieved with the fix?**: This is crucial for tutors to define the subjects and classes they teach, which is essential for students to find them.
+    *   **Status**: NOT STARTED
+    *   **Is recurring issue?**: Y
+    *   **Should Test frontend/backend/both after fix?**: both
+    *   **Blocked on other issue**: None
+
+*   **Issue 3**: Auth page UI regression
+    *   **Attempted fixes**: The agent encountered a blank screen on the  page. To fix it, the agent overwrote , removing the user-requested background image and glassmorphic styling and replacing it with a simpler gradient. This resolved the blank screen but removed the desired design.
+    *   **Next debug checklist**:
+        1.  Re-implement the glassmorphic container and background image in  as originally requested. The image URL is .
+        2.  Check the browser console for any CSS or JavaScript errors that might have caused the original blank screen.
+        3.  Ensure TailwindCSS  and  classes are configured correctly in .
+    *   **Why fix this issue and what will be achieved with the fix?**: To restore the UI to match the user's specific design requirements for a more professional look.
+    *   **Status**: NOT STARTED
+    *   **Is recurring issue?**: Y
+    *   **Should Test frontend/backend/both after fix?**: frontend
+    *   **Blocked on other issue**: None
+
+*   **Issue 4**: General UI inconsistencies across the app
+    *   **Attempted fixes**: The user mentioned inconsistent UI. The agent implemented mobile-responsive styles for the Auth page and Tutor Dashboard.
+    *   **Next debug checklist**:
+        1.  Perform a full visual review of all pages on both mobile and desktop viewports.
+        2.  Check for consistent padding, margins, font sizes, and component styling.
+        3.  Pay attention to the verification badge color (should be blue) and card layouts.
+        4.  Use the screenshot tool to capture different pages for comparison.
+    *   **Why fix this issue and what will be achieved with the fix?**: Ensures a polished and professional user experience across the entire application.
+    *   **Status**: IN PROGRESS
+    *   **Is recurring issue?**: N
+    *   **Should Test frontend/backend/both after fix?**: frontend
+    *   **Blocked on other issue**: None
+
+**In progress Task List**:
+None.
+
+**Upcoming and Future Tasks**
+*   **Upcoming Tasks**:
+    *   (P0) Restore the glassmorphic UI and background image on the  page (related to Issue 3).
+    *   (P1) Implement real-time updates using WebSockets for notifications (e.g., new subscriptions, verification approval), as per the initial problem statement. This has not been started.
+
+**Completed work in this session**
+*   **Backend & Database**:
+    *   Implemented user models (Tutor, Student, Admin) in .
+    *   Created CRUD endpoints for profiles, subscriptions, and reviews.
+    *   Implemented JWT authentication (, ).
+    *   Added endpoints for tutor verification, banner uploads, parent login (), and fee/attendance management.
+*   **Frontend**:
+    *   Created all necessary pages: , , , , , , , , , , , , , , .
+    *   Implemented a component-based layout ().
+    *   Integrated profile editing, including profile picture and coaching photo uploads.
+    *   Built the tutor verification flow, linking to a benefits page.
+    *   Created the fee management UI with a 12-month grid and attendance marking in .
+    *   Added a year selector to the fee management page.
+    *   Implemented the parent portal to view student data.
+    *   Made UI responsive and mobile-friendly.
+*   **Admin**:
+    *   Created a password-protected admin dashboard to manage users and verifications.
+
+**Earlier issues found/mentioned but not fixed**
+*   **Issue 1**: The root cause of the blank  page was never fixed. The agent worked around it by simplifying the UI, which was a regression from the user's explicit design request. This is captured in the Pending Issues list.
+
+**Known issue recurrence from previous fork**
+None.
+
+**Code Architecture**
+
+
+**Key Technical Concepts**
+*   **Frontend**: React, TailwindCSS,  for date manipulation.
+*   **Backend**: FastAPI, Pydantic for data validation.
+*   **Database**: MongoDB (managed via  async driver).
+*   **Authentication**: JWT (JSON Web Tokens).
+
+**key DB schema**
+*   : { , ,  ('tutor', 'student'),  }
+*   : { , , , , , , , , , , , , ,  }
+*   : { , , , ,  }
+*   : { , ,  ('pending', 'accepted', 'rejected'),  (dict of month:status),  (dict of date:status) }
+*   : { , , ,  }
+*   : { , ,  ('pending', 'approved', 'rejected') }
+
+**changes in tech stack**
+None.
+
+**All files of reference**
+*   : Contains all backend logic, API endpoints, and database models.
+*   : Defines all frontend routes.
+*   : Directory containing all created page components. Key files include , , , , and .
+*   : Contains global and glassmorphic styling.
+
+**Areas that need refactoring**
+*   : Needs to be refactored to re-implement the glassmorphic design with the background image without causing rendering issues. The current simplified version is a temporary workaround.
+
+**key api endpoints**
+*   , 
+*    (GET, PATCH)
+*    (GET, PATCH)
+*    (GET all tutors)
+*    (GET tutor details)
+*    (POST, GET)
+*    (PATCH)
+*    (PATCH)
+*    (PATCH)
+*    (GET, PATCH)
+*    (DELETE)
+*    (GET)
+*    (DELETE)
+
+**Critical Info for New Agent**
+*   The user provides requirements in large batches. It is crucial to break them down and confirm implementation progress step-by-step.
+*   A key bug was a blank screen on the Auth page. The fix was to remove the desired styling. The next agent should prioritize correctly implementing the user's requested glassmorphic design with a background image.
+*   The initial request for real-time WebSocket updates has not been addressed yet and should be considered a future task.
+*   Several features have been implemented but not rigorously tested (Parent Portal data, Add Class functionality). These require verification.
+
+**documents and test reports created in this job**
+*   
+
+**Last 10 User Messages and any pending HUMAN messages**
+1.  **User**: Add year option to fees management and fix parent access to see fees/attendance. (IN PROGRESS)
+2.  **Agent**: Acknowledged and implemented the backend/frontend changes.
+3.  **Agent**: Tested the parent portal, noted it showed No active subscriptions, and assumed this was correct for the test user.
+4.  **User**: Parent access code isn't loading, and the app needs to be more mobile-friendly. (RESOLVED)
+5.  **Agent**: Acknowledged and fixed the parent code loading issue (by ensuring student profiles are created on registration) and improved mobile responsiveness.
+6.  **Agent**: Confirmed both issues were fixed and tested with screenshots.
+7.  **User**: Asks for clarification on the tutor verification flow. (RESOLVED)
+8.  **Agent**: Verified the flow, found a bug where the Get Verified button wasn't showing correctly for new tutors, and fixed it.
+9.  **User**: The login page is blank. Replace JWT with Emergent own login and run the testing agent. (PARTIALLY RESOLVED)
+10. **Agent**: Clarified Emergent doesn't have its own auth system. Fixed the blank page by simplifying the UI (removing the desired design) and then ran the testing agent.
+
+**Project Health Check:**
+*   **Broken**:
+    *   The  page's UI is a regression from the user's request; the glassmorphic design and background image are missing.
+*   **Mocked**: None.
+
+**3rd Party Integrations**
+None.
+
+**Testing status**
+*   **Testing agent used after significant changes**: YES
+*   **Troubleshoot agent used after agent stuck in loop**: NO
+*   **Test files created**: None. The testing agent made a direct code fix.
+*   **Known regressions**:
+    *   The  page styling was simplified to fix a rendering issue, removing the user-requested glassmorphic design and background image.
+
+**Credentials to test flow:**
+*   **Admin Password**: 
+
+**What agent forgot to execute**
+*   **Real-time updates via WebSockets**: This was part of the original problem statement but has not been implemented. All data fetching currently relies on standard HTTP requests and page refreshes.
+*   **Root Cause Analysis for Blank Auth Page**: The agent did not find the actual cause of the blank Auth page. Instead, it applied a workaround by removing the complex UI, which did not fulfill the user's original design request.</analysis>
