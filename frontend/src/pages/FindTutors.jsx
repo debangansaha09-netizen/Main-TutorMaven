@@ -100,6 +100,16 @@ export default function FindTutors({ user, logout }) {
                             Classes: {tutor.classes_taught.map(c => c.class_range).join(', ')}
                           </p>
                         )}
+                        {/* Show boards */}
+                        {tutor.boards?.length > 0 && (
+                          <div className="flex flex-wrap gap-1 mb-2">
+                            {tutor.boards.map((board, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                                {board}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
                         <p className="text-lg font-bold text-blue-600">₹{tutor.monthly_fee}/month</p>
                       </div>
                     </div>
