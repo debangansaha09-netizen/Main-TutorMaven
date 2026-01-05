@@ -172,6 +172,19 @@ export default function TutorDetail({ user, logout }) {
                 <GraduationCap className="w-5 h-5 text-blue-600 mt-1" />
                 <p className="text-gray-700">{tutor.education || 'Not specified'}</p>
               </div>
+              {/* Boards Section */}
+              {tutor.boards && tutor.boards.length > 0 && (
+                <div className="mt-4">
+                  <p className="text-sm text-gray-600 mb-2">Boards Taught:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {tutor.boards.map((board, idx) => (
+                      <Badge key={idx} variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                        {board}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
 
