@@ -393,7 +393,7 @@ export default function TutorDashboard({ user, logout }) {
                 </Badge>
               ) : (
                 <Link to="/verification">
-                  <Button variant="outline" className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 border-0" data-testid="get-verified-btn">
+                  <Button variant="outline" className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 border-0 w-full sm:w-auto" data-testid="get-verified-btn">
                     Get Verified - ₹99
                   </Button>
                 </Link>
@@ -401,6 +401,30 @@ export default function TutorDashboard({ user, logout }) {
             )}
           </div>
         </div>
+
+        {/* Get Verified Card - Show for non-verified tutors */}
+        {!profile.is_verified && profile.verification_status !== 'pending' && (
+          <Card className="mb-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white border-0 shadow-lg">
+            <CardContent className="py-6 px-4 md:px-6">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                    <Award className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-bold">Get Verified Today!</h3>
+                    <p className="text-blue-100 text-sm md:text-base">Stand out with a blue checkmark and premium features</p>
+                  </div>
+                </div>
+                <Link to="/verification">
+                  <Button className="bg-white text-blue-600 hover:bg-blue-50 w-full md:w-auto" data-testid="get-verified-card-btn">
+                    Get Verified - ₹99
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
