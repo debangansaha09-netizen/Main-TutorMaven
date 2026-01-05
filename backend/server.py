@@ -204,7 +204,7 @@ class Notification(BaseModel):
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class VerificationProof(BaseModel):
-    proof_image: str
+    proof_image: Optional[str] = None  # No longer required
     phone_number: str
 
 class ParentLogin(BaseModel):
