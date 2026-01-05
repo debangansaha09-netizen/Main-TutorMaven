@@ -174,7 +174,7 @@ export default function TutorDashboard({ user, logout }) {
     <Layout user={user}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-testid="tutor-dashboard">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 space-y-4 md:space-y-0">
           <div className="flex items-center space-x-4">
             <Avatar className="h-16 w-16">
               <AvatarImage src={user.profile_picture} />
@@ -188,9 +188,19 @@ export default function TutorDashboard({ user, logout }) {
                 )}
               </div>
               <p className="text-gray-600">Tutor Dashboard</p>
+              {/* Show boards if set */}
+              {profile.boards && profile.boards.length > 0 && (
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {profile.boards.map((board, idx) => (
+                    <Badge key={idx} variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                      {board}
+                    </Badge>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-          <div className="flex space-x-3">
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
             <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
               <DialogTrigger asChild>
                 <Button data-testid="edit-profile-btn">Edit Profile</Button>
