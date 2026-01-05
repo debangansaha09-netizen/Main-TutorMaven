@@ -72,40 +72,42 @@ export default function Auth({ setUser }) {
   };
 
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center px-3 sm:px-4 py-6 relative"
-      style={{
-        backgroundImage: `url('https://customer-assets.emergentagent.com/job_learnhub-498/artifacts/ip50tq76_IMG-20251229-WA0000.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      {/* Dark overlay for better readability */}
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]" />
+    <div className="min-h-screen flex items-center justify-center px-3 sm:px-4 py-6 relative overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url('https://customer-assets.emergentagent.com/job_learnhub-498/artifacts/ip50tq76_IMG-20251229-WA0000.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/40 z-0" />
       
       <div className="w-full max-w-md relative z-10">
-        {/* Header with glassmorphic effect */}
+        {/* Header */}
         <div className="text-center mb-6 md:mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-md mb-3 md:mb-4 shadow-xl border border-white/30">
+          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/30 mb-3 md:mb-4 shadow-xl border border-white/40">
             <img 
               src="https://customer-assets.emergentagent.com/job_b50a8eda-643d-42ca-93a2-b95046836ba5/artifacts/p815m8ok_IMG-20251102-WA0004.jpg" 
               alt="TutorMaven Logo" 
               className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover"
             />
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-lg px-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white px-2" style={{textShadow: '0 2px 4px rgba(0,0,0,0.3)'}}>
             Welcome to TutorMaven
           </h1>
-          <p className="text-sm md:text-base text-white/90 mt-2 drop-shadow">Sign in or create an account</p>
+          <p className="text-sm md:text-base text-white/90 mt-2" style={{textShadow: '0 1px 2px rgba(0,0,0,0.3)'}}>Sign in or create an account</p>
         </div>
 
         {/* Glassmorphic Card */}
-        <div className="backdrop-blur-xl bg-white/20 rounded-2xl md:rounded-3xl shadow-2xl p-5 sm:p-6 md:p-8 border border-white/30">
+        <div className="bg-white/25 rounded-2xl md:rounded-3xl shadow-2xl p-5 sm:p-6 md:p-8 border border-white/40" style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)'}}>
           <Tabs defaultValue="login">
-            <TabsList className="grid w-full grid-cols-2 bg-white/20 backdrop-blur-md" data-testid="auth-tabs">
-              <TabsTrigger value="login" className="data-[state=active]:bg-white/40 data-[state=active]:text-gray-900 text-white/90" data-testid="login-tab">Login</TabsTrigger>
-              <TabsTrigger value="register" className="data-[state=active]:bg-white/40 data-[state=active]:text-gray-900 text-white/90" data-testid="register-tab">Register</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-white/30" data-testid="auth-tabs">
+              <TabsTrigger value="login" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-white" data-testid="login-tab">Login</TabsTrigger>
+              <TabsTrigger value="register" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-white" data-testid="register-tab">Register</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
@@ -119,7 +121,7 @@ export default function Auth({ setUser }) {
                     value={loginData.email}
                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                     required
-                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    className="mt-1 bg-white/90 border-white/50 focus:border-blue-400"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -132,7 +134,7 @@ export default function Auth({ setUser }) {
                     value={loginData.password}
                     onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                     required
-                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    className="mt-1 bg-white/90 border-white/50 focus:border-blue-400"
                     placeholder="Enter your password"
                   />
                 </div>
@@ -158,7 +160,7 @@ export default function Auth({ setUser }) {
                     value={registerData.name}
                     onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
                     required
-                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    className="mt-1 bg-white/90 border-white/50 focus:border-blue-400"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -171,7 +173,7 @@ export default function Auth({ setUser }) {
                     value={registerData.email}
                     onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                     required
-                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    className="mt-1 bg-white/90 border-white/50 focus:border-blue-400"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -184,7 +186,7 @@ export default function Auth({ setUser }) {
                     value={registerData.password}
                     onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                     required
-                    className="mt-1 bg-white/80 backdrop-blur-sm border-white/40 focus:border-blue-400 placeholder:text-gray-500"
+                    className="mt-1 bg-white/90 border-white/50 focus:border-blue-400"
                     placeholder="Create a password"
                   />
                 </div>
@@ -196,12 +198,12 @@ export default function Auth({ setUser }) {
                     data-testid="role-radio-group"
                     className="mt-2 space-y-2"
                   >
-                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-colors">
-                      <RadioGroupItem value="student" id="student" data-testid="student-radio" className="border-white text-white" />
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-white/30 border border-white/40 hover:bg-white/40 transition-colors">
+                      <RadioGroupItem value="student" id="student" data-testid="student-radio" className="border-white text-blue-600" />
                       <Label htmlFor="student" className="font-normal cursor-pointer flex-1 text-white">Student</Label>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-colors">
-                      <RadioGroupItem value="tutor" id="tutor" data-testid="tutor-radio" className="border-white text-white" />
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-white/30 border border-white/40 hover:bg-white/40 transition-colors">
+                      <RadioGroupItem value="tutor" id="tutor" data-testid="tutor-radio" className="border-white text-blue-600" />
                       <Label htmlFor="tutor" className="font-normal cursor-pointer flex-1 text-white">Tutor</Label>
                     </div>
                   </RadioGroup>
@@ -210,12 +212,12 @@ export default function Auth({ setUser }) {
                   <Label htmlFor="profile-picture" className="text-white font-medium">Profile Picture (Optional)</Label>
                   <div className="mt-2">
                     <label htmlFor="profile-upload" className="cursor-pointer">
-                      <div className="border-2 border-dashed border-white/40 rounded-lg p-4 text-center hover:border-white/60 hover:bg-white/10 transition-colors backdrop-blur-sm">
+                      <div className="border-2 border-dashed border-white/50 rounded-lg p-4 text-center hover:border-white/70 hover:bg-white/10 transition-colors">
                         {registerData.profile_picture ? (
-                          <img src={registerData.profile_picture} alt="Profile" className="w-20 h-20 rounded-full mx-auto object-cover border-2 border-white/40" />
+                          <img src={registerData.profile_picture} alt="Profile" className="w-20 h-20 rounded-full mx-auto object-cover border-2 border-white/50" />
                         ) : (
                           <div>
-                            <Upload className="w-8 h-8 mx-auto text-white/70" />
+                            <Upload className="w-8 h-8 mx-auto text-white/80" />
                             <p className="text-sm text-white/80 mt-2">Click to upload</p>
                           </div>
                         )}
@@ -246,10 +248,10 @@ export default function Auth({ setUser }) {
 
         {/* Footer Links */}
         <div className="text-center mt-6 space-y-2">
-          <a href="/admin" className="block text-sm text-white/90 hover:text-white hover:underline drop-shadow transition-colors" data-testid="admin-login-link">
+          <a href="/admin" className="block text-sm text-white/90 hover:text-white hover:underline transition-colors" style={{textShadow: '0 1px 2px rgba(0,0,0,0.3)'}} data-testid="admin-login-link">
             Admin Login
           </a>
-          <a href="/parent" className="block text-sm text-white/90 hover:text-white hover:underline drop-shadow transition-colors" data-testid="parent-login-link">
+          <a href="/parent" className="block text-sm text-white/90 hover:text-white hover:underline transition-colors" style={{textShadow: '0 1px 2px rgba(0,0,0,0.3)'}} data-testid="parent-login-link">
             Parent Access Portal
           </a>
         </div>
