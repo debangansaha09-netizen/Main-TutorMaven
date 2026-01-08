@@ -31,8 +31,8 @@ export default function HelpSupport({ user, logout }) {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 mb-4">Send us an email and we'll get back to you within 24 hours</p>
-              <a href="mailto:oryncreations@gmail.com" className="text-blue-600 hover:underline" data-testid="email-link">
-                oryncreations@gmail.com
+              <a href="mailto:tutormaven100@gmail.com" className="text-blue-600 hover:underline" data-testid="email-link">
+                tutormaven100@gmail.com
               </a>
             </CardContent>
           </Card>
@@ -100,7 +100,7 @@ export default function HelpSupport({ user, logout }) {
                   <h3 className="font-semibold text-gray-900 mb-2">For Tutors:</h3>
                   <ul className="list-disc list-inside space-y-1 text-gray-600">
                     <li>Complete your profile with subjects, fees, and coaching details</li>
-                    <li>Upload ₹49 payment proof to get verified badge</li>
+                    <li>Upload ₹99 payment proof to get verified badge</li>
                     <li>Accept or reject subscription requests from students</li>
                     <li>Manage student fees and attendance from your dashboard</li>
                     <li>View your stats including reach, subscribers, and income</li>
