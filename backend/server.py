@@ -66,7 +66,7 @@ class UserRole(str, Enum):
     TUTOR = "tutor"
     STUDENT = "student"
     ADMIN = "admin"
-    TESTINGADMIN = "admin"
+    
 
 class SubscriptionStatus(str, Enum):
     PENDING = "pending"
@@ -90,7 +90,6 @@ class AttendanceStatus(str, Enum):
 class UserRegister(BaseModel):
     email: EmailStr
     password: str
-    name: str
     role: UserRole
     profile_picture: Optional[str] = None
 
@@ -135,7 +134,7 @@ class TutorProfile(BaseModel):
     contact_number: Optional[str] = None
     coaching_photo: Optional[str] = None
     teaching_days: List[str] = []
-    hours_per_day: int = 0
+    hours_per_day: Optional[str] = None
     boards: List[str] = []  # CBSE, ICSE, STATE BOARD
     is_verified: bool = False
     verification_proof: Optional[str] = None
