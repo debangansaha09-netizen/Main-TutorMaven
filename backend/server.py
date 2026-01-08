@@ -66,6 +66,7 @@ class UserRole(str, Enum):
     TUTOR = "tutor"
     STUDENT = "student"
     ADMIN = "admin"
+    TESTINGADMIN = "admin"
 
 class SubscriptionStatus(str, Enum):
     PENDING = "pending"
