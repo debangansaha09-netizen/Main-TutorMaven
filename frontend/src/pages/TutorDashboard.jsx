@@ -73,7 +73,7 @@ export default function TutorDashboard({ user, logout }) {
         name: user.name || ''
       });
     } catch (error) {
-      toast.error('Error fetching data');
+      toast.error('Error fetching data please open your app again');
     }
   };
 
@@ -106,7 +106,7 @@ export default function TutorDashboard({ user, logout }) {
       setEditDialogOpen(false);
       window.location.reload();
     } catch (error) {
-      toast.error('Error updating profile');
+      toast.error('Error updating profile please open your app again');
     }
   };
 
@@ -145,7 +145,7 @@ export default function TutorDashboard({ user, logout }) {
       setNewClass({ class_range: '', subjects: '' });
       fetchData();
     } catch (error) {
-      toast.error('Error adding class');
+      toast.error('This feature will come soon');
     }
   };
 
@@ -322,13 +322,13 @@ export default function TutorDashboard({ user, logout }) {
                       value={formData.hours_per_day}
                       onChange={(e) => setFormData({ ...formData, hours_per_day: e.target.value })}
                       data-testid="hours-input"
-                      placeholder="e.g., 6"
+                      placeholder="e.g., 8"
                     />
                   </div>
                   <div>
                     <Label>Boards You Teach</Label>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {['CBSE', 'ICSE', 'STATE BOARD'].map(board => (
+                      {['CBSE', 'ICSE', 'STATE BOARD', 'NIOS'].map(board => (
                         <Button
                           key={board}
                           type="button"
@@ -362,7 +362,7 @@ export default function TutorDashboard({ user, logout }) {
                             </div>
                           ) : (
                             <div>
-                              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-3">
+                              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-100 mb-3">
                                 <Upload className="w-8 h-8 text-blue-600" />
                               </div>
                               <p className="text-sm font-medium text-gray-700">Click to upload coaching centre photo</p>
